@@ -22,7 +22,7 @@ public class BenalmadenaCars {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         } catch (SQLException ex) {
             System.err.println("Imposible conectar");
             ex.printStackTrace();
@@ -81,8 +81,9 @@ public class BenalmadenaCars {
                     + "'" + contraseña + "','" + licencia
                     + "','" + dni + "');");
             registerStatement.close();
+                System.out.println("\n\tNuevo usuario creado con éxito");
             return actual;
-
+                
         } catch (SQLException ex) {
             Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -106,7 +107,7 @@ public class BenalmadenaCars {
             ResultSet foundUser = loginStatement.executeQuery();
 
             if (foundUser.next()) { //Usuario encontrado
-                System.out.println("Bienvenido al sistema");
+                System.out.println("\n\t"+nombre+", has sido conectado con el sistema. ¡Bienvenido!");
             }
 
         } catch (SQLException ex) {
