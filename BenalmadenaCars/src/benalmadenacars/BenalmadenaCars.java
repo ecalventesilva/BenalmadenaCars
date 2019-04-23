@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,8 +20,7 @@ public class BenalmadenaCars {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Connection connection = null;
-      
-     
+
         try {
             connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
         } catch (SQLException ex) {
@@ -28,7 +28,7 @@ public class BenalmadenaCars {
             ex.printStackTrace();
             System.exit(0);
         }
-        
+
         String menu = "\n\nIntroduce un número para realizar una acción:"
                 + "\n\t0 - EXIT"
                 + "\n\t1 - NEW USER"
@@ -43,7 +43,7 @@ public class BenalmadenaCars {
                 case 0:
                     System.out.println("¡Hasta Pronto!");
                     break;
-                case 1:                  
+                case 1:
                     if (user == null) {
                         user = registarUsuario(sc, connection); //CREAR UNA FUNCIÓN "REGISTRAR USUARIO"
                     } else {
@@ -53,7 +53,7 @@ public class BenalmadenaCars {
                 case 2:
                     user = loginUsuario(sc, connection); //CREAR UNA FUNCIÓN "LOGIN USUARIO"
                     break;
-                    
+
                 default:
                     System.err.println("Opción inválida");
                     break;
@@ -63,41 +63,52 @@ public class BenalmadenaCars {
     }
 
     public static Usuario registarUsuario(Scanner sc, Connection conec) {
-        System.out.println("Introduce un nombre de usuario:");
-        String usuario= sc.nextLine();
-        System.out.println("Introduce una contraseña:");
-        String contraseña= sc.nextLine();
-        System.out.println("Introduce tu número de licencia:");
-        String licencia= sc.nextLine();
-        System.out.println("Introduce tu DNI:");
-        String dni= sc.nextLine();
-        
-        
-        
-        return null;
+        try {
+            System.out.println("Introduce un nombre de usuario:");
+            String nombre = sc.nextLine();
+            System.out.println("Introduce una contraseña:");
+            String contraseña = sc.nextLine();
+            System.out.println("Introduce tu número de licencia:");
+            String licencia = sc.nextLine();
+            System.out.println("Introduce tu DNI:");
+            String dni = sc.nextLine();
 
+            Usuario actual = new Usuario(nombre, contraseña, licencia, dni);
+            Statement registerStatement = conec.createStatement();
+            registerStatement.executeUpdate(
+                    "insert into usuario (nombre,contraseña,licencia,dni"
+                    + ") values('" + nombre + "',"
+                    + "'" + contraseña + "','" + licencia
+                    + "','" + dni + "');");
+            registerStatement.close();
+            return actual;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public static Usuario loginUsuario(Scanner sc, Connection conec) {
 
         try {
             System.out.println("Introduce tu nombre de usuario");
-            String username = sc.nextLine();
+            String nombre = sc.nextLine();
             System.out.println("Introduce tu contraseña");
-            String password = sc.nextLine();
-            
-            PreparedStatement loginStatement=
-                    conec.prepareStatement(
+            String contraseña = sc.nextLine();
+
+            PreparedStatement loginStatement
+                    = conec.prepareStatement(
                             "select * from usuario where nombre=? "
-                                    + "and =? ");
-            loginStatement.setString(1, username);
-            loginStatement.setString(2, password);
-            ResultSet foundUser=loginStatement.executeQuery();
-            
-            if(foundUser.next()){ //Usuario encontrado
-                 System.out.println("Bienvenido al sistema");
+                            + "and contraseña =? ");
+            loginStatement.setString(1, nombre);
+            loginStatement.setString(2, contraseña);
+            ResultSet foundUser = loginStatement.executeQuery();
+
+            if (foundUser.next()) { //Usuario encontrado
+                System.out.println("Bienvenido al sistema");
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
         }

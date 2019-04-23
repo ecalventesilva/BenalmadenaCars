@@ -8,7 +8,7 @@ package clases;
 public class Usuario extends Persona{
      private String password;
 
-    public Usuario(String nombre, String apellidos, int licencia, String dni) {
+    public Usuario(String nombre, String apellidos, String licencia, String dni) {
         super(nombre, apellidos, licencia, dni);
     }
 

@@ -17,7 +17,7 @@ public class Cliente extends Persona {
     private String direccionSpain;
     private String direccionResidencia;
 
-    public Cliente(String nombre, String apellidos, int licencia, String dni) {
+    public Cliente(String nombre, String apellidos, String licencia, String dni) {
         super(nombre, apellidos, licencia, dni);
     }
 

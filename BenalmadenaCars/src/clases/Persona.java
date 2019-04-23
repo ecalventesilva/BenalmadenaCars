@@ -9,10 +9,10 @@ public class Persona {
     
     private String nombre;
     private String apellidos;
-    private int licencia;
+    private String licencia;
     private String dni;
 
-    public Persona(String nombre, String apellidos, int licencia, String dni) {
+    public Persona(String nombre, String apellidos, String licencia, String dni) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.licencia = licencia;
@@ -27,7 +27,7 @@ public class Persona {
         return apellidos;
     }
 
-    public int getLicencia() {
+    public String getLicencia() {
         return licencia;
     }
 
@@ -43,7 +43,7 @@ public class Persona {
         this.apellidos = apellidos;
     }
 
-    public void setLicencia(int licencia) {
+    public void setLicencia(String licencia) {
         this.licencia = licencia;
     }
 
