@@ -33,7 +33,8 @@ public class BenalmadenaCars {
         String menu = "\n\nIntroduce un número para realizar una acción:"
                 + "\n\t0 - EXIT"
                 + "\n\t1 - NEW USER"
-                + "\n\t2 - LOGIN";
+                + "\n\t2 - LOGIN"
+                + "\n\t3 - ELIMINAR USUARIO";
         int action = 0;
         Usuario user = null;
         do {
@@ -54,7 +55,9 @@ public class BenalmadenaCars {
                 case 2:
                     user = loginUsuario(sc, connection); //CREAR UNA FUNCIÓN "LOGIN USUARIO"
                     break;
-
+                case 3:
+                    user=eliminarUsuario(sc, connection);
+                    break;
                 default:
                     System.err.println("Opción inválida");
                     break;
@@ -121,6 +124,32 @@ public class BenalmadenaCars {
             Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public static Usuario eliminarUsuario(Scanner sc, Connection conec) {
+        
+        try {
+            System.out.println("Introduce tu nombre de usuario");
+            String nombre = sc.nextLine();
+            System.out.println("Introduce tu contraseña");
+            String contraseña = sc.nextLine();
+            System.out.println("Confirma tu contraseña");
+            String contraseña2=sc.nextLine();
+           
+            if(contraseña.equals(contraseña2)){
+                    
+                    
+            Statement registerStatement = conec.createStatement();
+            registerStatement.executeUpdate(
+                    "delete from usuario where nombre=('" + nombre + "');");
+            registerStatement.close();
+                System.out.println("\n\tUsuario eliminado con éxito");
+            
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
     }
 
 }
