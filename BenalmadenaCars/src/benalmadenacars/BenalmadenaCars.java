@@ -22,7 +22,7 @@ public class BenalmadenaCars {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
         } catch (SQLException ex) {
             System.err.println("Imposible conectar");
             ex.printStackTrace();
@@ -68,18 +68,19 @@ public class BenalmadenaCars {
             String nombre = sc.nextLine();
             System.out.println("Introduce una contraseña:");
             String contraseña = sc.nextLine();
-            System.out.println("Introduce tu número de licencia:");
-            String licencia = sc.nextLine();
             System.out.println("Introduce tu DNI:");
             String dni = sc.nextLine();
+            System.out.println("Introduce tu número de licencia:");
+            int licencia = Integer.parseInt(sc.nextLine());
+            
 
-            Usuario actual = new Usuario(nombre, contraseña, licencia, dni);
+            Usuario actual = new Usuario(nombre, contraseña, dni, licencia);
             Statement registerStatement = conec.createStatement();
             registerStatement.executeUpdate(
-                    "insert into usuario (nombre,contraseña,licencia,dni"
+                    "insert into usuario (nombre,contraseña,dni,licencia"
                     + ") values('" + nombre + "',"
-                    + "'" + contraseña + "','" + licencia
-                    + "','" + dni + "');");
+                    + "'" + contraseña + "','" + dni
+                    + "','" + licencia + "');");
             registerStatement.close();
                 System.out.println("\n\tNuevo usuario creado con éxito");
             return actual;
