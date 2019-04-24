@@ -1,6 +1,8 @@
 
 package clases;
 
+import Excepciones.DniInvalidoException;
+
 /**
  *
  * @author EDUARDO
@@ -8,7 +10,7 @@ package clases;
 public class Usuario extends Persona{
      private String password;
 
-    public Usuario(String nombre, String apellidos, String dni, int licencia) {
+    public Usuario(String nombre, String apellidos, String dni, int licencia) throws DniInvalidoException {
         super(nombre, apellidos, dni, licencia);
     }
 

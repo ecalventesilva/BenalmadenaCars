@@ -1,23 +1,24 @@
-
 package clases;
+
+import Excepciones.DniInvalidoException;
 
 /**
  *
  * @author EDUARDO
  */
 public class Persona {
-    
+
     private String nombre;
     private String apellidos;
     private String dni;
     private int licencia;
 
-    public Persona(String nombre, String apellidos, String dni, int licencia) {
+    public Persona(String nombre, String apellidos, String dni, int licencia) throws DniInvalidoException {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.dni = dni;
+        setDni(dni);
         this.licencia = licencia;
-        
+
     }
 
     public String getNombre() {
@@ -48,9 +49,11 @@ public class Persona {
         this.licencia = licencia;
     }
 
-    public void setDni(String dni) {
+    public void setDni(String dni) throws DniInvalidoException {
+        if (dni.length() != 9) {
+            throw new DniInvalidoException("El DNI ha fallado!");
+        }
         this.dni = dni;
     }
-    
-    
+
 }

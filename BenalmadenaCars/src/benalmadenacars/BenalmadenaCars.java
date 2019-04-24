@@ -1,5 +1,6 @@
 package benalmadenacars;
 
+import Excepciones.DniInvalidoException;
 import clases.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -87,6 +88,9 @@ public class BenalmadenaCars {
                 
         } catch (SQLException ex) {
             Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DniInvalidoException ex) {
+            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
+            ex.getMessage();
         }
         return null;
     }
@@ -109,6 +113,8 @@ public class BenalmadenaCars {
 
             if (foundUser.next()) { //Usuario encontrado
                 System.out.println("\n\t"+nombre+", has sido conectado con el sistema. ¡Bienvenido!");
+            }else{
+                System.out.println("\n\tEl usuario '"+nombre+"' no se encuentra registrado en la Base de Datos.");
             }
 
         } catch (SQLException ex) {

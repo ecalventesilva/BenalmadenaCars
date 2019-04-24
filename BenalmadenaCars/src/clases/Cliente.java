@@ -5,6 +5,7 @@
  */
 package clases;
 
+import Excepciones.DniInvalidoException;
 import java.time.LocalDate;
 
 /**
@@ -17,7 +18,7 @@ public class Cliente extends Persona {
     private String direccionSpain;
     private String direccionResidencia;
 
-    public Cliente(String nombre, String apellidos, String dni, int licencia) {
+    public Cliente(String nombre, String apellidos, String dni, int licencia) throws DniInvalidoException {
         super(nombre, apellidos, dni, licencia);
     }
 
