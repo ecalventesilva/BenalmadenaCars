@@ -29,7 +29,9 @@ public class BenalmadenaCars {
             ex.printStackTrace();
             System.exit(0);
         }
-
+        /**
+         * Menú pantalla principal del programa
+         */
         String menu = "\n\nIntroduce un número para realizar una acción:"
                 + "\n\t0 - EXIT"
                 + "\n\t1 - NEW USER"
@@ -47,16 +49,16 @@ public class BenalmadenaCars {
                     break;
                 case 1:
                     if (user == null) {
-                        user = registarUsuario(sc, connection); //CREAR UNA FUNCIÓN "REGISTRAR USUARIO"
+                        user = registarUsuario(sc, connection);
                     } else {
                         System.out.println("Registra el usuario");
                     }
                     break;
                 case 2:
-                    user = loginUsuario(sc, connection); //CREAR UNA FUNCIÓN "LOGIN USUARIO"
+                    user = loginUsuario(sc, connection);
                     break;
                 case 3:
-                    user=eliminarUsuario(sc, connection);
+                    user = eliminarUsuario(sc, connection);
                     break;
                 default:
                     System.err.println("Opción inválida");
@@ -66,6 +68,15 @@ public class BenalmadenaCars {
 
     }
 
+    /**
+     * Función resgistrarUsuario: sirve para registrar un usuario en la bd de
+     * datos; el sistema solicita: nombre de usuario, contraseña, dni, y número
+     * de licencia.
+     *
+     * @param sc
+     * @param conec
+     * @return
+     */
     public static Usuario registarUsuario(Scanner sc, Connection conec) {
         try {
             System.out.println("Introduce un nombre de usuario:");
@@ -76,7 +87,6 @@ public class BenalmadenaCars {
             String dni = sc.nextLine();
             System.out.println("Introduce tu número de licencia:");
             int licencia = Integer.parseInt(sc.nextLine());
-            
 
             Usuario actual = new Usuario(nombre, contraseña, dni, licencia);
             Statement registerStatement = conec.createStatement();
@@ -86,9 +96,9 @@ public class BenalmadenaCars {
                     + "'" + contraseña + "','" + dni
                     + "','" + licencia + "');");
             registerStatement.close();
-                System.out.println("\n\tNuevo usuario creado con éxito");
+            System.out.println("\n\tNuevo usuario creado con éxito");
             return actual;
-                
+
         } catch (SQLException ex) {
             Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DniInvalidoException ex) {
@@ -98,6 +108,14 @@ public class BenalmadenaCars {
         return null;
     }
 
+    /**
+     * Función loginUsuario: función que sirve para acceder al sistema,
+     * introduciendo correctamente usuario y contraseña.
+     *
+     * @param sc
+     * @param conec
+     * @return
+     */
     public static Usuario loginUsuario(Scanner sc, Connection conec) {
 
         try {
@@ -115,9 +133,9 @@ public class BenalmadenaCars {
             ResultSet foundUser = loginStatement.executeQuery();
 
             if (foundUser.next()) { //Usuario encontrado
-                System.out.println("\n\t"+nombre+", has sido conectado con el sistema. ¡Bienvenido!");
-            }else{
-                System.out.println("\n\tEl usuario '"+nombre+"' no se encuentra registrado en la Base de Datos.");
+                System.out.println("\n\t" + nombre + ", has sido conectado con el sistema. ¡Bienvenido!");
+            } else {
+                System.out.println("\n\tEl usuario '" + nombre + "' no se encuentra registrado en la Base de Datos.");
             }
 
         } catch (SQLException ex) {
@@ -125,26 +143,46 @@ public class BenalmadenaCars {
         }
         return null;
     }
+
+    /**
+     * Función elminarUsuario: elimina al introducir nombre y contraseña, el
+     * usuario en la bd.
+     *
+     * @param sc
+     * @param conec
+     * @return
+     */
     public static Usuario eliminarUsuario(Scanner sc, Connection conec) {
-        
+
         try {
             System.out.println("Introduce tu nombre de usuario");
             String nombre = sc.nextLine();
             System.out.println("Introduce tu contraseña");
             String contraseña = sc.nextLine();
             System.out.println("Confirma tu contraseña");
-            String contraseña2=sc.nextLine();
-           
-            if(contraseña.equals(contraseña2)){
-                    
-                    
-            Statement registerStatement = conec.createStatement();
-            registerStatement.executeUpdate(
-                    "delete from usuario where nombre=('" + nombre + "');");
-            registerStatement.close();
+            String contraseña2 = sc.nextLine();
+
+            /**
+             * Uso de un 'if' para confirmar que la contraseña introducida es
+             * correcta.
+             */
+            for (int i= 0; i <3; i++){
+            if (contraseña.equals(contraseña2)) {
+
+                Statement registerStatement = conec.createStatement();
+                registerStatement.executeUpdate(
+                        "delete from usuario where nombre=('" + nombre + "');");
+                registerStatement.close();
                 System.out.println("\n\tUsuario eliminado con éxito");
+                
+            }else{
+                System.err.println("Error: las contraseñas introducidas no coinciden.");
+                
+                System.out.println("Te quedan: " + i+" intentos.");
+            }
+            }
             
-        }
+            
         } catch (SQLException ex) {
             Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
         }
