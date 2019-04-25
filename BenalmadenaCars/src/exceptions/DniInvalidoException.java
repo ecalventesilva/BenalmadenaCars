@@ -1,5 +1,5 @@
 
-package Excepciones;
+package exceptions;
 
 /**
  *

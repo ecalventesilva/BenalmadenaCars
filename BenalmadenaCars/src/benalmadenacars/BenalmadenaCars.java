@@ -1,6 +1,6 @@
 package benalmadenacars;
 
-import Excepciones.DniInvalidoException;
+import exceptions.DniInvalidoException;
 import clases.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -166,7 +166,6 @@ public class BenalmadenaCars {
              * Uso de un 'if' para confirmar que la contraseña introducida es
              * correcta.
              */
-            for (int i= 0; i <3; i++){
             if (contraseña.equals(contraseña2)) {
 
                 Statement registerStatement = conec.createStatement();
@@ -174,12 +173,8 @@ public class BenalmadenaCars {
                         "delete from usuario where nombre=('" + nombre + "');");
                 registerStatement.close();
                 System.out.println("\n\tUsuario eliminado con éxito");
-                
             }else{
-                System.err.println("Error: las contraseñas introducidas no coinciden.");
-                
-                System.out.println("Te quedan: " + i+" intentos.");
-            }
+                System.err.println("Error: las contraseñas introducidas no coinciden");
             }
             
             

@@ -1,7 +1,7 @@
 
 package clases;
 
-import Excepciones.DniInvalidoException;
+import exceptions.DniInvalidoException;
 
 /**
  *

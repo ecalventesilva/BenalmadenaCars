@@ -5,7 +5,7 @@
  */
 package clases;
 
-import Excepciones.DniInvalidoException;
+import exceptions.DniInvalidoException;
 import java.time.LocalDate;
 
 /**
