@@ -179,7 +179,7 @@ public class BenalmadenaCars {
             
             
         } catch (SQLException ex) {
-            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return null;
 
