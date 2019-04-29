@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
@@ -13,6 +15,10 @@ import java.awt.Insets;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.Label;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
 
 public class DeleteUser extends JFrame {
 
@@ -124,6 +130,19 @@ public class DeleteUser extends JFrame {
 		contentPane.add(passwordField_1, gbc_passwordField_1);
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				UserEliminado userEliminado=new UserEliminado();
+				userEliminado.setVisible(true);
+				userEliminado.setTitle("Benalmadena Cars");
+				try {
+					userEliminado.setIconImage(ImageIO.read(new File("./rent.png")));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		GridBagConstraints gbc_btnEliminar = new GridBagConstraints();
 		gbc_btnEliminar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEliminar.gridx = 3;

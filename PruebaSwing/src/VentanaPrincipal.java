@@ -19,7 +19,6 @@ public class VentanaPrincipal extends JFrame{
 	private JPasswordField passwordField;
 	
 	public VentanaPrincipal() {
-		setSize(new Dimension(300, 350));
 		getContentPane().setForeground(Color.BLACK);
 		setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		setBackground(Color.WHITE);
@@ -27,7 +26,7 @@ public class VentanaPrincipal extends JFrame{
 		
 		JButton Login = new JButton("Login");
 		Login.setForeground(Color.BLACK);
-		Login.setBounds(49, 200, 97, 23);
+		Login.setBounds(49, 200, 104, 23);
 		getContentPane().add(Login);
 		
 		JButton newUser = new JButton("New User");
@@ -46,20 +45,20 @@ public class VentanaPrincipal extends JFrame{
 				
 			}
 		});
-		newUser.setBounds(159, 200, 89, 23);
+		newUser.setBounds(159, 200, 104, 23);
 		getContentPane().add(newUser);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(98, 103, 86, 20);
+		textField_1.setBounds(151, 103, 86, 20);
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(10, 106, 46, 14);
+		lblUsuario.setBounds(42, 106, 46, 14);
 		getContentPane().add(lblUsuario);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setBounds(10, 137, 78, 14);
+		lblContrasea.setBounds(40, 137, 78, 14);
 		getContentPane().add(lblContrasea);
 		
 		JLabel lblBenalmadenaCarsSl = new JLabel("BENALMADENA CARS SL");
@@ -82,11 +81,11 @@ public class VentanaPrincipal extends JFrame{
 				
 			}
 		});
-		btnDeleteUser.setBounds(49, 238, 97, 23);
+		btnDeleteUser.setBounds(49, 238, 104, 23);
 		getContentPane().add(btnDeleteUser);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(98, 134, 86, 20);
+		passwordField.setBounds(151, 134, 86, 20);
 		getContentPane().add(passwordField);
 	}
 }
