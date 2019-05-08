@@ -1,6 +1,7 @@
 package benalmadenacars;
 
 import exceptions.DniInvalidoException;
+import interfaces.Ventana;
 import clases.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,20 +20,22 @@ import java.util.logging.Logger;
 public class BenalmadenaCars {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    	Ventana v=new Ventana();
+    	v.setVisible(true);
+    	Scanner sc = new Scanner(System.in);
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
         } catch (SQLException ex) {
             System.err.println("Imposible conectar");
             ex.printStackTrace();
             System.exit(0);
         }
         /**
-         * Menú pantalla principal del programa
+         * Menu pantalla principal del programa
          */
-        String menu = "\n\nIntroduce un número para realizar una acción:"
+        String menu = "\n\nIntroduce un numero para realizar una accion:"
                 + "\n\t0 - EXIT"
                 + "\n\t1 - NEW USER"
                 + "\n\t2 - LOGIN"
@@ -45,7 +48,7 @@ public class BenalmadenaCars {
             action = Integer.parseInt(sc.nextLine());
             switch (action) {
                 case 0:
-                    System.out.println("¡Hasta Pronto!");
+                    System.out.println("�Hasta Pronto!");
                     break;
                 case 1:
                     if (user == null) {
@@ -61,7 +64,7 @@ public class BenalmadenaCars {
                     user = eliminarUsuario(sc, connection);
                     break;
                 default:
-                    System.err.println("Opción inválida");
+                    System.err.println("Opcion invalida!");
                     break;
             }
         } while (action != 0);
@@ -69,8 +72,8 @@ public class BenalmadenaCars {
     }
 
     /**
-     * Función resgistrarUsuario: sirve para registrar un usuario en la bd de
-     * datos; el sistema solicita: nombre de usuario, contraseña, dni, y número
+     * Funcion resgistrarUsuario: sirve para registrar un usuario en la bd de
+     * datos; el sistema solicita: nombre de usuario, password, dni, y numero
      * de licencia.
      *
      * @param sc
@@ -81,22 +84,22 @@ public class BenalmadenaCars {
         try {
             System.out.println("Introduce un nombre de usuario:");
             String nombre = sc.nextLine();
-            System.out.println("Introduce una contraseña:");
-            String contraseña = sc.nextLine();
+            System.out.println("Introduce una password:");
+            String password = sc.nextLine();
             System.out.println("Introduce tu DNI:");
             String dni = sc.nextLine();
-            System.out.println("Introduce tu número de licencia:");
+            System.out.println("Introduce tu numero de licencia:");
             int licencia = Integer.parseInt(sc.nextLine());
 
-            Usuario actual = new Usuario(nombre, contraseña, dni, licencia);
+            Usuario actual = new Usuario(nombre, password, dni, licencia);
             Statement registerStatement = conec.createStatement();
             registerStatement.executeUpdate(
-                    "insert into usuario (nombre,contraseña,dni,licencia"
+                    "insert into usuario (nombre,password,dni,licencia"
                     + ") values('" + nombre + "',"
-                    + "'" + contraseña + "','" + dni
+                    + "'" + password + "','" + dni
                     + "','" + licencia + "');");
             registerStatement.close();
-            System.out.println("\n\tNuevo usuario creado con éxito");
+            System.out.println("\n\tNuevo usuario creado con exito");
             return actual;
 
         } catch (SQLException ex) {
@@ -109,7 +112,8 @@ public class BenalmadenaCars {
     }
 
     /**
-     * Función loginUsuario: función que sirve para acceder al sistema,
+     * Función loginUsuario: funciu
+     * on que sirve para acceder al sistema,
      * introduciendo correctamente usuario y contraseña.
      *
      * @param sc
@@ -121,15 +125,15 @@ public class BenalmadenaCars {
         try {
             System.out.println("Introduce tu nombre de usuario");
             String nombre = sc.nextLine();
-            System.out.println("Introduce tu contraseña");
-            String contraseña = sc.nextLine();
+            System.out.println("Introduce tu password");
+            String password = sc.nextLine();
 
             PreparedStatement loginStatement
                     = conec.prepareStatement(
                             "select * from usuario where nombre=? "
-                            + "and contraseña =? ");
+                            + "and password =? ");
             loginStatement.setString(1, nombre);
-            loginStatement.setString(2, contraseña);
+            loginStatement.setString(2, password);
             ResultSet foundUser = loginStatement.executeQuery();
 
             if (foundUser.next()) { //Usuario encontrado
@@ -145,7 +149,7 @@ public class BenalmadenaCars {
     }
 
     /**
-     * Función elminarUsuario: elimina al introducir nombre y contraseña, el
+     * Funcion elminarUsuario: elimina al introducir nombre y contraseña, el
      * usuario en la bd.
      *
      * @param sc
@@ -157,22 +161,22 @@ public class BenalmadenaCars {
         try {
             System.out.println("Introduce tu nombre de usuario");
             String nombre = sc.nextLine();
-            System.out.println("Introduce tu contraseña");
-            String contraseña = sc.nextLine();
-            System.out.println("Confirma tu contraseña");
-            String contraseña2 = sc.nextLine();
+            System.out.println("Introduce tu password");
+            String password = sc.nextLine();
+            System.out.println("Confirma tu password");
+            String password2 = sc.nextLine();
 
             /**
-             * Uso de un 'if' para confirmar que la contraseña introducida es
-             * correcta.
+             * Uso de un 'if' para confirmar que la password introducido es
+             * correcto.
              */
-            if (contraseña.equals(contraseña2)) {
+            if (password.equals(password2)) {
 
                 Statement registerStatement = conec.createStatement();
                 registerStatement.executeUpdate(
                         "delete from usuario where nombre=('" + nombre + "');");
                 registerStatement.close();
-                System.out.println("\n\tUsuario eliminado con éxito");
+                System.out.println("\n\tUsuario eliminado con exito");
             }else{
                 System.err.println("Error: las contraseñas introducidas no coinciden");
             }

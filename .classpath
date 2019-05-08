@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="BenalmadenaCars/src"/>
+	<classpathentry kind="src" path="PruebaSwing/src"/>
+	<classpathentry kind="lib" path="BenalmadenaCars/dist/BenalmadenaCars.jar"/>
+	<classpathentry kind="lib" path="BenalmadenaCars/dist/lib/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="lib" path="PruebaSwing/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="PruebaSwing/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="output" path="BenalmadenaCars/build/classes"/>
+</classpath>
