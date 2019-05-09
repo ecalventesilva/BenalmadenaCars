@@ -65,6 +65,7 @@ public Login(Ventana v) {
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ventana.cargaPantallaInicio();
 				
 			}
 		});

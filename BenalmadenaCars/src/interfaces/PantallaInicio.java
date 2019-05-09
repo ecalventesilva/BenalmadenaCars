@@ -31,12 +31,19 @@ public class PantallaInicio extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				ventana.cargaPantallaLogin();
+				
 			}
 		});
 		btnLogin.setBounds(125, 147, 112, 23);
 		add(btnLogin);
 		
 		JButton btnRegistro = new JButton("REGISTRO");
+		btnRegistro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ventana.cargaPantallaRegistro();
+			}
+		});
 		btnRegistro.setBounds(125, 209, 112, 23);
 		add(btnRegistro);
 		

@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 public class Principal extends JPanel{
 	private Ventana ventana;
@@ -20,5 +21,10 @@ public class Principal extends JPanel{
 		label.setBackground(SystemColor.menu);
 		label.setBounds(68, 11, 225, 48);
 		add(label);
+		
+		JButton btnNewButton = new JButton("HOLA");
+		btnNewButton.setBounds(130, 117, 118, 62);
+		add(btnNewButton);
 
-}}
+}	
+}
