@@ -14,11 +14,12 @@ public class Ventana extends JFrame{
 	private Principal principal;
 	private Usuario usuario; 
 	private Registro pantallaRegistro;
-	
+	private DeleteUser deleteUser;
 
 public Ventana() {
 		super();
 		pantallaInicio=new PantallaInicio(this);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(350,350);
 		setResizable(false);
 		setVisible(true);
@@ -71,6 +72,7 @@ public void cargaPantallaInicio() {
 	if(this.pantallaRegistro!=null) {
 		this.pantallaRegistro.setVisible(false);
 	}
+	this.setSize(350,350);
 	this.setContentPane(this.pantallaInicio);
 	this.pantallaInicio.setVisible(true);
 	this.setTitle("Pantalla Inicio");
@@ -80,9 +82,20 @@ public void cargaPantallaRegistro() {
 		this.pantallaRegistro=new Registro(this);
 	}
 	this.pantallaInicio.setVisible(false);
+	this.setSize(450,450);
 	this.setContentPane(this.pantallaRegistro);
 	this.pantallaRegistro.setVisible(true);
 	this.setTitle("Registro");
+}
+public void cargaDeleteUser() {
+	if(this.deleteUser==null) {
+		this.deleteUser=new DeleteUser(this);
+	}
+	this.pantallaInicio.setVisible(false);
+	this.setSize(450,300);
+	this.setContentPane(this.deleteUser);
+	this.deleteUser.setVisible(true);
+	this.setTitle("Eliminar Usuario");
 }
 
 

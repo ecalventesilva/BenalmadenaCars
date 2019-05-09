@@ -10,8 +10,8 @@ import exceptions.DniInvalidoException;
 public class Usuario extends Persona{
      private String password;
 
-    public Usuario(String nombre, String apellidos, String dni, int licencia) throws DniInvalidoException {
-        super(nombre, apellidos, dni, licencia);
+    public Usuario(String nombre, String password, String dni, int licencia) throws DniInvalidoException {
+        super(nombre, password, dni, licencia);
     }
 
     public String getPassword() {

@@ -12,6 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Cursor;
 
 public class Login extends JPanel{
 	private Ventana ventana;
@@ -52,6 +53,7 @@ public Login(Ventana v) {
 		add(campoPassword);
 		
 		JButton btnLogin = new JButton("LOGIN");
+		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -62,6 +64,7 @@ public Login(Ventana v) {
 		add(btnLogin);
 		
 		JButton btnCancelar = new JButton("CANCELAR");
+		btnCancelar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
