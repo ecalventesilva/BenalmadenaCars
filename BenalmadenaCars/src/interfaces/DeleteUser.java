@@ -13,16 +13,26 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+
+import benalmadenacars.BenalmadenaCars;
+
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DeleteUser extends JPanel{
 	private Ventana ventana;
-	private JTextField textUsuario;
-	private JPasswordField textPassword;
-	private JPasswordField textPassword2;
-
+	private JTextField campoUsuario;
+	private JPasswordField campoPassword;
+	private JPasswordField campoPassword2;
+	private Connection conec;
 	
 	public DeleteUser(Ventana v) {
 		super();
@@ -43,40 +53,69 @@ public class DeleteUser extends JPanel{
 		lblEliminarUsuario.setBounds(143, 70, 158, 14);
 		add(lblEliminarUsuario);
 		
-		JLabel campoUsuario = new JLabel("Usuario");
-		campoUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
-		campoUsuario.setBounds(64, 129, 75, 14);
-		add(campoUsuario);
-		
-		JLabel campoPassword = new JLabel("Contrase\u00F1a");
-		campoPassword.setFont(new Font("Tahoma", Font.BOLD, 12));
-		campoPassword.setBounds(64, 154, 75, 14);
-		add(campoPassword);
-		
-		JLabel campoPassword2 = new JLabel("Confirma Contrase\u00F1a");
-		campoPassword2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		campoPassword2.setBounds(64, 179, 144, 14);
-		add(campoPassword2);
-		
-		textUsuario = new JTextField();
-		textUsuario.setBounds(215, 127, 158, 20);
+		JLabel textUsuario = new JLabel("Usuario");
+		textUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
+		textUsuario.setBounds(64, 129, 75, 14);
 		add(textUsuario);
-		textUsuario.setColumns(10);
 		
-		textPassword = new JPasswordField();
-		textPassword.setBounds(215, 152, 158, 20);
+		JLabel textPassword = new JLabel("Contrase\u00F1a");
+		textPassword.setFont(new Font("Tahoma", Font.BOLD, 12));
+		textPassword.setBounds(64, 154, 75, 14);
 		add(textPassword);
 		
-		textPassword2 = new JPasswordField();
-		textPassword2.setBounds(215, 177, 158, 20);
+		JLabel textPassword2 = new JLabel("Confirma Contrase\u00F1a");
+		textPassword2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		textPassword2.setBounds(64, 179, 144, 14);
 		add(textPassword2);
+		
+		campoUsuario = new JTextField();
+		campoUsuario.setBounds(215, 127, 158, 20);
+		add(campoUsuario);
+		campoUsuario.setColumns(10);
+		
+		campoPassword = new JPasswordField();
+		campoPassword.setBounds(215, 152, 158, 20);
+		add(campoPassword);
+		
+		campoPassword2 = new JPasswordField();
+		campoPassword2.setBounds(215, 177, 158, 20);
+		add(campoPassword2);
 		
 		JButton btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(ventana, "¡Usuario eliminado con éxito!","",JOptionPane.INFORMATION_MESSAGE);
-			}
+				try {
+		    		conec=DriverManager.getConnection(
+		    				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+				} catch(SQLNonTransientConnectionException ex) {
+					//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
+				}catch (SQLException ex) {
+					JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
+				            ex.printStackTrace();
+				}
+				try {
+					String username=campoUsuario.getText();
+		            String password=String.copyValueOf(campoPassword.getPassword());
+		            String password2=String.copyValueOf(campoPassword2.getPassword());
+		            
+		            if (password.equals(password2)) {
+		                Statement deleteStatement = conec.createStatement();
+		                deleteStatement.executeUpdate(
+		                        "delete from usuario where nombre=('" + username + "');");
+		                deleteStatement.close();
+		                JOptionPane.showMessageDialog(ventana, "¡Usuario eliminado con éxito!","User Delete",JOptionPane.INFORMATION_MESSAGE);
+		                ventana.cargaPantallaInicio();
+		                
+		            }else{
+		            	JOptionPane.showMessageDialog(ventana, "Error: las contraseñas introducidas no coinciden","ERROR",JOptionPane.ERROR_MESSAGE);
+		            }
+				 } catch (SQLException ex) {
+			            ex.printStackTrace();
+				
+				 }
+				 
+				}
 		});
 		btnEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminar.setBorder(new LineBorder(new Color(255, 0, 0)));

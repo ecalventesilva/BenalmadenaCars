@@ -2,9 +2,14 @@ package interfaces;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
 
 import clases.Usuario;
 
@@ -15,7 +20,8 @@ public class Ventana extends JFrame{
 	private Usuario usuario; 
 	private Registro pantallaRegistro;
 	private DeleteUser deleteUser;
-
+	private Connection conn;
+	
 public Ventana() {
 		super();
 		pantallaInicio=new PantallaInicio(this);
@@ -34,6 +40,8 @@ public Ventana() {
 		
 		
 	}
+	
+
 public Usuario getUsuario() {
 	return usuario;
 }
@@ -45,6 +53,7 @@ public void cargaPantallaLogin() {
 	if(this.pantallaLogin==null) {
 		this.pantallaLogin=new Login(this);
 	}
+	this.setSize(350,350);
 	this.pantallaInicio.setVisible(false);
 	this.setContentPane(this.pantallaLogin);
 	this.pantallaLogin.setVisible(true);

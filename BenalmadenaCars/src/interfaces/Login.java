@@ -4,14 +4,27 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import benalmadenacars.BenalmadenaCars;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.awt.Cursor;
 
 public class Login extends JPanel{
@@ -21,6 +34,7 @@ public class Login extends JPanel{
 	private Principal principal;
 	private JTextField campoUsuario;
 	private JPasswordField campoPassword;
+	private Connection conec;
 	
 public Login(Ventana v) {
 		super();
@@ -32,24 +46,24 @@ public Login(Ventana v) {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Microsoft YaHei", Font.BOLD, 14));
 		label.setBackground(SystemColor.menu);
-		label.setBounds(68, 11, 225, 48);
+		label.setBounds(52, 11, 245, 48);
 		add(label);
 		
 		JLabel lblUsuario = new JLabel("USUARIO");
-		lblUsuario.setBounds(51, 100, 92, 24);
+		lblUsuario.setBounds(33, 99, 92, 24);
 		add(lblUsuario);
 		
 		JLabel lblPassword = new JLabel("PASSWORD");
-		lblPassword.setBounds(51, 150, 92, 24);
+		lblPassword.setBounds(33, 149, 92, 24);
 		add(lblPassword);
 		
 		campoUsuario = new JTextField();
-		campoUsuario.setBounds(167, 102, 148, 20);
+		campoUsuario.setBounds(149, 101, 148, 20);
 		add(campoUsuario);
 		campoUsuario.setColumns(10);
 		
 		campoPassword = new JPasswordField();
-		campoPassword.setBounds(167, 152, 148, 20);
+		campoPassword.setBounds(149, 151, 148, 20);
 		add(campoPassword);
 		
 		JButton btnLogin = new JButton("LOGIN");
@@ -57,10 +71,40 @@ public Login(Ventana v) {
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.cargaPrincipal();	
-			}
+				try {
+		    		conec=DriverManager.getConnection(
+		    				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+				} catch(SQLNonTransientConnectionException ex) {
+					//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
+				}catch (SQLException ex) {
+					JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
+				            ex.printStackTrace();
+				}
+				try {
+					String username=campoUsuario.getText();
+		            String password=String.copyValueOf(campoPassword.getPassword());
+		            PreparedStatement loginStatement
+		                    = conec.prepareStatement(
+		                            "select * from usuario where nombre=? "
+		                            + "and password =? ");
+		            loginStatement.setString(1, username);
+                    loginStatement.setString(2, password);
+		            ResultSet foundUser = loginStatement.executeQuery();
+
+		            if (foundUser.next()) { //Usuario encontrado
+		            	JOptionPane.showMessageDialog(ventana,""+username +", has sido conectado con el sistema. ¡Bienvenido!","Login Correcto",JOptionPane.INFORMATION_MESSAGE);
+		            	ventana.cargaPrincipal();
+		            } else {
+		            	JOptionPane.showMessageDialog(ventana, "El usuario, no se encuentra en la base de datos","",JOptionPane.ERROR_MESSAGE);
+		            }
+
+		        } catch (SQLException ex) {
+		            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
+		        
+		        
+		    }}
 		});
-		btnLogin.setBounds(214, 226, 108, 23);
+		btnLogin.setBounds(182, 227, 108, 23);
 		add(btnLogin);
 		
 		JButton btnCancelar = new JButton("CANCELAR");
@@ -72,8 +116,10 @@ public Login(Ventana v) {
 				
 			}
 		});
-		btnCancelar.setBounds(100, 226, 104, 23);
+		btnCancelar.setBounds(68, 227, 104, 23);
 		add(btnCancelar);
 
 }	
+
+
 }
