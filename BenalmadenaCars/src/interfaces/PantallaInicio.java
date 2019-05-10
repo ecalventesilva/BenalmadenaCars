@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,10 +23,11 @@ public class PantallaInicio extends JPanel{
 		setLayout(null);
 		
 		JLabel lblBenalmdenaCarsSl = new JLabel("BENALM\u00C1DENA CARS SL");
+		lblBenalmdenaCarsSl.setForeground(Color.BLACK);
 		lblBenalmdenaCarsSl.setBackground(new Color(240, 240, 240));
-		lblBenalmdenaCarsSl.setFont(new Font("Microsoft YaHei", Font.BOLD, 14));
+		lblBenalmdenaCarsSl.setFont(new Font("Microsoft YaHei", Font.BOLD, 15));
 		lblBenalmdenaCarsSl.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBenalmdenaCarsSl.setBounds(65, 11, 225, 48);
+		lblBenalmdenaCarsSl.setBounds(37, 11, 232, 55);
 		add(lblBenalmdenaCarsSl);
 		
 		JButton btnLogin = new JButton("LOGIN");
@@ -36,7 +39,7 @@ public class PantallaInicio extends JPanel{
 				
 			}
 		});
-		btnLogin.setBounds(110, 147, 144, 23);
+		btnLogin.setBounds(24, 117, 144, 23);
 		add(btnLogin);
 		
 		JButton btnRegistro = new JButton("REGISTRO");
@@ -47,12 +50,13 @@ public class PantallaInicio extends JPanel{
 				ventana.cargaPantallaRegistro();
 			}
 		});
-		btnRegistro.setBounds(110, 193, 144, 23);
+		btnRegistro.setBounds(24, 162, 144, 23);
 		add(btnRegistro);
 		
 		JLabel lblBienvenidoAlSistema = new JLabel("Bienvenido al Sistema");
+		lblBienvenidoAlSistema.setForeground(Color.BLACK);
 		lblBienvenidoAlSistema.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBienvenidoAlSistema.setBounds(110, 71, 144, 28);
+		lblBienvenidoAlSistema.setBounds(24, 66, 144, 28);
 		add(lblBienvenidoAlSistema);
 		
 		JButton btnEliminarUsuario = new JButton("ELIMINAR USUARIO");
@@ -62,8 +66,14 @@ public class PantallaInicio extends JPanel{
 				ventana.cargaDeleteUser();
 			}
 		});
-		btnEliminarUsuario.setBounds(110, 238, 144, 23);
+		btnEliminarUsuario.setBounds(24, 208, 144, 23);
 		add(btnEliminarUsuario);
+		
+		JLabel imagen = new JLabel("");
+		imagen.setBounds(136, 25, 314, 251);
 		ventana=v;
+		imagen.setIcon(new ImageIcon("./corsa.png"));
+		add(imagen);
+		
 }	
 }

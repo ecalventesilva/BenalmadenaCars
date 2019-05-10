@@ -9,7 +9,7 @@ import java.sql.SQLNonTransientConnectionException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-
+import javax.swing.JOptionPane;
 
 import clases.Usuario;
 
@@ -20,13 +20,14 @@ public class Ventana extends JFrame{
 	private Usuario usuario; 
 	private Registro pantallaRegistro;
 	private DeleteUser deleteUser;
-	private Connection conn;
+	public Connection connection;
+	private Ventana ventana;
 	
 public Ventana() {
 		super();
 		pantallaInicio=new PantallaInicio(this);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(350,350);
+		setSize(450,300);
 		setResizable(false);
 		setVisible(true);
 		this.setContentPane(pantallaInicio);
@@ -41,6 +42,16 @@ public Ventana() {
 		
 	}
 	
+
+public Connection getConnection() {
+	return connection;
+}
+
+
+public void setConnection(Connection connection) {
+	this.connection = connection;
+}
+
 
 public Usuario getUsuario() {
 	return usuario;
@@ -81,7 +92,7 @@ public void cargaPantallaInicio() {
 	if(this.pantallaRegistro!=null) {
 		this.pantallaRegistro.setVisible(false);
 	}
-	this.setSize(350,350);
+	this.setSize(450,300);
 	this.setContentPane(this.pantallaInicio);
 	this.pantallaInicio.setVisible(true);
 	this.setTitle("Pantalla Inicio");
@@ -106,6 +117,20 @@ public void cargaDeleteUser() {
 	this.deleteUser.setVisible(true);
 	this.setTitle("Eliminar Usuario");
 }
-
+public Usuario conectarBd() {
+	
+	try {
+		setConnection(DriverManager.getConnection(
+				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", ""));
+	} catch(SQLNonTransientConnectionException ex) {
+		//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
+	}catch (SQLException ex) {
+		JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
+	            ex.printStackTrace();
+	}
+	
+	return usuario;
+	
+}
 
 }

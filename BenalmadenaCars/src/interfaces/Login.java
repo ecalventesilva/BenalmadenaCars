@@ -71,20 +71,13 @@ public Login(Ventana v) {
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-		    		conec=DriverManager.getConnection(
-		    				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
-				} catch(SQLNonTransientConnectionException ex) {
-					//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
-				}catch (SQLException ex) {
-					JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
-				            ex.printStackTrace();
-				}
+			
+				ventana.conectarBd();
 				try {
 					String username=campoUsuario.getText();
 		            String password=String.copyValueOf(campoPassword.getPassword());
 		            PreparedStatement loginStatement
-		                    = conec.prepareStatement(
+		                    = ventana.getConnection().prepareStatement(
 		                            "select * from usuario where nombre=? "
 		                            + "and password =? ");
 		            loginStatement.setString(1, username);
@@ -97,6 +90,8 @@ public Login(Ventana v) {
 		            } else {
 		            	JOptionPane.showMessageDialog(ventana, "El usuario, no se encuentra en la base de datos","",JOptionPane.ERROR_MESSAGE);
 		            }
+		            campoUsuario.setText("");
+	            	campoPassword.setText("");
 
 		        } catch (SQLException ex) {
 		            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);

@@ -109,15 +109,7 @@ public class Registro extends JPanel{
 		btnConfirmar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				try {
-		    		conec=DriverManager.getConnection(
-		    				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
-				} catch(SQLNonTransientConnectionException ex) {
-					//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
-				}catch (SQLException ex) {
-					JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
-				            ex.printStackTrace();
-				}
+				ventana.conectarBd();
 				try {
 		            String usuario=campoUsuario.getText();
 		            String password=String.copyValueOf(campoPassword.getPassword());
@@ -126,7 +118,7 @@ public class Registro extends JPanel{
 		      
 		            
 		            Usuario actual = new Usuario(usuario, password, dni, licencia);
-		            Statement registerStatement = conec.createStatement();
+		            Statement registerStatement = ventana.getConnection().createStatement();
 		            registerStatement.executeUpdate(
 		                    "insert into usuario (nombre,password,dni,licencia"
 		                    + ") values('" + usuario + "',"
@@ -134,7 +126,7 @@ public class Registro extends JPanel{
 		                    + "','" + licencia + "');");
 		            registerStatement.close();
 		            JOptionPane.showMessageDialog(ventana, "Nuevo usuario creado con exito","",JOptionPane.INFORMATION_MESSAGE);
-		            ventana.cargaPantallaLogin();
+		            ventana.cargaPantallaInicio();
 		            
 		            return;
 
@@ -142,8 +134,14 @@ public class Registro extends JPanel{
 			            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
 				 } catch (DniInvalidoException ex) {
 			            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
+			            JOptionPane.showMessageDialog(ventana, "Has introducido un DNI erróneo","Error",JOptionPane.ERROR_MESSAGE);
 			            ex.getMessage();
 			        }
+				ventana.cargaPantallaInicio();
+	            campoUsuario.setText("");
+	            campoPassword.setText("");
+	            campoDni.setText("");
+	            campoLicencia.setText("");
 				
 			    }
 		});

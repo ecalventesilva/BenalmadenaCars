@@ -85,32 +85,43 @@ public class DeleteUser extends JPanel{
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
+				/*try {
 		    		conec=DriverManager.getConnection(
-		    				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+		    				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
 				} catch(SQLNonTransientConnectionException ex) {
 					//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
 				}catch (SQLException ex) {
 					JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
 				            ex.printStackTrace();
-				}
+				}*/
+				ventana.conectarBd();
 				try {
 					String username=campoUsuario.getText();
 		            String password=String.copyValueOf(campoPassword.getPassword());
 		            String password2=String.copyValueOf(campoPassword2.getPassword());
-		            
+		     
 		            if (password.equals(password2)) {
-		                Statement deleteStatement = conec.createStatement();
+		            	if(!password.equals("")&&!password2.equals("")&&!username.equals("")) {
+		                Statement deleteStatement = ventana.getConnection().createStatement();
 		                deleteStatement.executeUpdate(
 		                        "delete from usuario where nombre=('" + username + "');");
 		                deleteStatement.close();
 		                JOptionPane.showMessageDialog(ventana, "¡Usuario eliminado con éxito!","User Delete",JOptionPane.INFORMATION_MESSAGE);
+		                
 		                ventana.cargaPantallaInicio();
 		                
-		            }else{
+		            	}else {
+		            		JOptionPane.showMessageDialog(ventana, "Por favor, rellene todos los campos para eliminar usuario","",JOptionPane.INFORMATION_MESSAGE);
+		            	}
+		            	
+		            	}else{
 		            	JOptionPane.showMessageDialog(ventana, "Error: las contraseñas introducidas no coinciden","ERROR",JOptionPane.ERROR_MESSAGE);
 		            }
-				 } catch (SQLException ex) {
+		            campoUsuario.setText("");
+		            campoPassword.setText("");
+		            campoPassword2.setText("");
+		            
+				 }catch (SQLException ex) {
 			            ex.printStackTrace();
 				
 				 }
