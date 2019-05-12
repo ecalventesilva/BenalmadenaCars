@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
+import java.awt.Point;
 
 public class PantallaInicio extends JPanel{
 
@@ -72,7 +73,7 @@ public class PantallaInicio extends JPanel{
 		JLabel imagen = new JLabel("");
 		imagen.setBounds(136, 25, 314, 251);
 		ventana=v;
-		imagen.setIcon(new ImageIcon("./corsa.png"));
+		imagen.setIcon(new ImageIcon("imagenes/corsa.png"));
 		add(imagen);
 		
 }	

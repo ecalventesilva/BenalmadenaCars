@@ -125,7 +125,7 @@ public class Registro extends JPanel{
 		                    + "'" + password + "','" + dni
 		                    + "','" + licencia + "');");
 		            registerStatement.close();
-		            JOptionPane.showMessageDialog(ventana, "Nuevo usuario creado con exito","",JOptionPane.INFORMATION_MESSAGE);
+		            JOptionPane.showMessageDialog(ventana, "El usuario: ''"+usuario+"'',"+" ha sido creado con exito","",JOptionPane.INFORMATION_MESSAGE);
 		            ventana.cargaPantallaInicio();
 		            
 		            return;

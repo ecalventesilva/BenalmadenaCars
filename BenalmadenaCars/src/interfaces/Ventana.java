@@ -30,10 +30,11 @@ public Ventana() {
 		setSize(450,300);
 		setResizable(false);
 		setVisible(true);
+		setLocation(450,180);
 		this.setContentPane(pantallaInicio);
 		this.setTitle("Bienvenido");
 		try {
-			this.setIconImage(ImageIO.read(new File("/rent.png")));
+			this.setIconImage(ImageIO.read(new File("imagenes/rent.png")));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

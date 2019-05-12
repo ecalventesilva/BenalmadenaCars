@@ -111,7 +111,7 @@ public class DeleteUser extends JPanel{
 		                ventana.cargaPantallaInicio();
 		                
 		            	}else {
-		            		JOptionPane.showMessageDialog(ventana, "Por favor, rellene todos los campos para eliminar usuario","",JOptionPane.INFORMATION_MESSAGE);
+		            		JOptionPane.showMessageDialog(ventana, "Por favor, rellene todos los campos para eliminar usuario","",JOptionPane.ERROR_MESSAGE);
 		            	}
 		            	
 		            	}else{
