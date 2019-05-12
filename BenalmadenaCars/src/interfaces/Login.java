@@ -26,6 +26,7 @@ import java.sql.SQLNonTransientConnectionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Cursor;
+import javax.swing.border.LineBorder;
 
 public class Login extends JPanel{
 	private Ventana ventana;
