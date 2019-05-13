@@ -76,6 +76,7 @@ public void cargaPrincipal() {
 	if(this.principal==null) {
 		this.principal=new Principal(this);
 	}
+	this.setSize(450,300);
 	this.pantallaLogin.setVisible(false);
 	this.setContentPane(this.principal);
 	this.principal.setVisible(true);
