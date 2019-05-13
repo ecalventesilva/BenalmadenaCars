@@ -1,6 +1,7 @@
 package benalmadenacars;
 
 import exceptions.DniInvalidoException;
+import exceptions.LicenciaInvalidaException;
 import interfaces.Ventana;
 import clases.Usuario;
 import java.sql.Connection;
@@ -26,7 +27,7 @@ public class BenalmadenaCars {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
         } catch (SQLException ex) {
             System.err.println("Imposible conectar");
             ex.printStackTrace();
@@ -107,7 +108,10 @@ public class BenalmadenaCars {
         } catch (DniInvalidoException ex) {
             Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
             ex.getMessage();
-        }
+        } catch (LicenciaInvalidaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return null;
     }
 

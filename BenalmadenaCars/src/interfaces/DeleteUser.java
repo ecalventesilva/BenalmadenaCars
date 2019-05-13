@@ -84,16 +84,7 @@ public class DeleteUser extends JPanel{
 		JButton btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				/*try {
-		    		conec=DriverManager.getConnection(
-		    				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
-				} catch(SQLNonTransientConnectionException ex) {
-					//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
-				}catch (SQLException ex) {
-					JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
-				            ex.printStackTrace();
-				}*/
+			public void mouseClicked(MouseEvent e) {	
 				ventana.conectarBd();
 				try {
 					String username=campoUsuario.getText();

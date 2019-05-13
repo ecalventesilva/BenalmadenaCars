@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import benalmadenacars.BenalmadenaCars;
 import clases.Usuario;
 import exceptions.DniInvalidoException;
+import exceptions.LicenciaInvalidaException;
 
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -132,11 +133,17 @@ public class Registro extends JPanel{
 
 				 } catch (SQLException ex) {
 			            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
+			            
 				 } catch (DniInvalidoException ex) {
 			            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
 			            JOptionPane.showMessageDialog(ventana, "Has introducido un DNI erróneo","Error",JOptionPane.ERROR_MESSAGE);
 			            ex.getMessage();
-			        }
+				 
+			        } catch (LicenciaInvalidaException e) {
+			        	JOptionPane.showMessageDialog(ventana, "Has introducido un número de licencia inválido","Error",JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}
+				
 				ventana.cargaPantallaInicio();
 	            campoUsuario.setText("");
 	            campoPassword.setText("");

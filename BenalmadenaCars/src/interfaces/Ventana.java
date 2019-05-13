@@ -96,7 +96,7 @@ public void cargaPantallaInicio() {
 	this.setSize(450,300);
 	this.setContentPane(this.pantallaInicio);
 	this.pantallaInicio.setVisible(true);
-	this.setTitle("Pantalla Inicio");
+	this.setTitle("Bienvenido");
 }
 public void cargaPantallaRegistro() {
 	if(this.pantallaRegistro==null) {
@@ -122,7 +122,7 @@ public Usuario conectarBd() {
 	
 	try {
 		setConnection(DriverManager.getConnection(
-				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin"));
+				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", ""));
 	} catch(SQLNonTransientConnectionException ex) {
 		//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
 	}catch (SQLException ex) {

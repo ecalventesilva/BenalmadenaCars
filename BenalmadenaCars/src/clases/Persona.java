@@ -1,6 +1,7 @@
 package clases;
 
 import exceptions.DniInvalidoException;
+import exceptions.LicenciaInvalidaException;
 
 /**
  *
@@ -13,11 +14,12 @@ public class Persona {
     private String dni;
     private int licencia;
 
-    public Persona(String nombre, String apellidos, String dni, int licencia) throws DniInvalidoException {
+    public Persona(String nombre, String apellidos, String dni, int licencia) throws DniInvalidoException, LicenciaInvalidaException{
         this.nombre = nombre;
         this.apellidos = apellidos;
         setDni(dni);
-        this.licencia = licencia;
+        setLicencia(licencia);
+        
 
     }
 
@@ -45,7 +47,11 @@ public class Persona {
         this.apellidos = apellidos;
     }
 
-    public void setLicencia(int licencia) {
+    public void setLicencia(int licencia) throws LicenciaInvalidaException{
+    	if(String.valueOf(licencia).length()!=8) {
+    		
+    		throw new LicenciaInvalidaException("Licencia errónea");
+    	}
         this.licencia = licencia;
     }
 

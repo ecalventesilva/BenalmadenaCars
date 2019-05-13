@@ -2,6 +2,7 @@
 package clases;
 
 import exceptions.DniInvalidoException;
+import exceptions.LicenciaInvalidaException;
 
 /**
  *
@@ -10,7 +11,7 @@ import exceptions.DniInvalidoException;
 public class Usuario extends Persona{
      private String password;
 
-    public Usuario(String nombre, String password, String dni, int licencia) throws DniInvalidoException {
+    public Usuario(String nombre, String password, String dni, int licencia) throws DniInvalidoException, LicenciaInvalidaException {
         super(nombre, password, dni, licencia);
     }
 
