@@ -29,6 +29,9 @@ import java.util.logging.Logger;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.Cursor;
+import javax.swing.JScrollBar;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Registro extends JPanel{
 	private Ventana ventana;
@@ -69,41 +72,41 @@ public class Registro extends JPanel{
 		
 		JLabel textUsuario = new JLabel("Nombre Usuario");
 		textUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textUsuario.setBounds(39, 158, 124, 23);
+		textUsuario.setBounds(50, 141, 124, 23);
 		add(textUsuario);
 		
 		JLabel textPassword = new JLabel("Contrase\u00F1a");
 		textPassword.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textPassword.setBounds(39, 192, 124, 23);
+		textPassword.setBounds(50, 175, 124, 23);
 		add(textPassword);
 		
 		JLabel textDni = new JLabel("DNI");
 		textDni.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textDni.setBounds(39, 231, 124, 23);
+		textDni.setBounds(50, 209, 124, 23);
 		add(textDni);
 		
 		JLabel textLicencia = new JLabel("Licencia");
 		textLicencia.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textLicencia.setBounds(39, 265, 124, 23);
+		textLicencia.setBounds(50, 243, 124, 23);
 		add(textLicencia);
 		
 		campoUsuario = new JTextField();
-		campoUsuario.setBounds(171, 160, 209, 20);
+		campoUsuario.setBounds(182, 143, 209, 20);
 		add(campoUsuario);
 		campoUsuario.setColumns(10);
 		
 		campoDni = new JTextField();
 		campoDni.setColumns(10);
-		campoDni.setBounds(171, 233, 209, 20);
+		campoDni.setBounds(182, 211, 209, 20);
 		add(campoDni);
 		
 		campoLicencia = new JTextField();
 		campoLicencia.setColumns(10);
-		campoLicencia.setBounds(171, 267, 209, 20);
+		campoLicencia.setBounds(182, 245, 209, 20);
 		add(campoLicencia);
 		
 		campoPassword = new JPasswordField();
-		campoPassword.setBounds(171, 194, 209, 20);
+		campoPassword.setBounds(182, 177, 209, 20);
 		add(campoPassword);
 		
 		JButton btnConfirmar = new JButton("CONFIRMAR");
