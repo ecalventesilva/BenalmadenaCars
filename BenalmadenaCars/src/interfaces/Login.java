@@ -89,7 +89,7 @@ public Login(Ventana v) {
 		            	JOptionPane.showMessageDialog(ventana,""+username +", has sido conectado con el sistema. ¡Bienvenido!","Login Correcto",JOptionPane.INFORMATION_MESSAGE);
 		            	ventana.cargaPrincipal();
 		            } else {
-		            	JOptionPane.showMessageDialog(ventana, "El usuario, no se encuentra en la base de datos","",JOptionPane.ERROR_MESSAGE);
+		            	JOptionPane.showMessageDialog(ventana, "El usuario no se encuentra en la base de datos","",JOptionPane.ERROR_MESSAGE);
 		            }
 		            campoUsuario.setText("");
 	            	campoPassword.setText("");

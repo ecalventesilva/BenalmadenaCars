@@ -8,11 +8,14 @@ package clases;
 
 
 public class Coche {
-    private String matricula;
+	private String marca;
     private String modelo;
+    private String matricula;
     private String color;
     private String tipo;
-    private boolean precio_dia;
+    private String motor;
+    private String descripcion;
+    private float precio_dia;
     
 
     public enum color{
@@ -23,6 +26,10 @@ public class Coche {
         AZUL,
         MARRON
 
+    }
+    public enum motor{
+    	GASOLINA,
+    	DIESEL
     }
    
    

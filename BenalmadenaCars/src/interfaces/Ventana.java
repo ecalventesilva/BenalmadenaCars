@@ -18,10 +18,12 @@ public class Ventana extends JFrame{
 	private Login pantallaLogin;
 	private Principal principal;
 	private Usuario usuario; 
-	private Registro pantallaRegistro;
+	private RegistroUsuario pantallaRegistro;
 	private DeleteUser deleteUser;
 	public Connection connection;
 	private Ventana ventana;
+	private Coches coches;
+	private RegistroCoche registroCoche;
 	
 public Ventana() {
 		super();
@@ -101,7 +103,7 @@ public void cargaPantallaInicio() {
 }
 public void cargaPantallaRegistro() {
 	if(this.pantallaRegistro==null) {
-		this.pantallaRegistro=new Registro(this);
+		this.pantallaRegistro=new RegistroUsuario(this);
 	}
 	this.pantallaInicio.setVisible(false);
 	this.setSize(450,450);
@@ -123,7 +125,7 @@ public Usuario conectarBd() {
 	
 	try {
 		setConnection(DriverManager.getConnection(
-				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin"));
+				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", ""));
 	} catch(SQLNonTransientConnectionException ex) {
 		//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
 	}catch (SQLException ex) {
@@ -133,6 +135,27 @@ public Usuario conectarBd() {
 	
 	return usuario;
 	
+}
+public void cargaCoches() {
+	if(this.coches==null) {
+		this.coches=new Coches(this);
+	}
+	this.principal.setVisible(false);
+	this.setSize(500,530);
+	this.setContentPane(this.coches);
+	this.coches.setVisible(true);
+	this.setTitle("Coches");
+}
+
+public void cargaRegistroCoche() {
+	if(this.registroCoche==null) {
+		this.registroCoche=new RegistroCoche(this);
+	}
+	this.coches.setVisible(false);
+	this.setSize(450,530);
+	this.setContentPane(this.registroCoche);
+	this.registroCoche.setVisible(true);
+	this.setTitle("Registar Coche");
 }
 
 }

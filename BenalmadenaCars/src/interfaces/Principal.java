@@ -11,12 +11,14 @@ import java.awt.Button;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
+import java.awt.Cursor;
 
 public class Principal extends JPanel{
 	private Ventana ventana;
 	
 	public Principal(Ventana v) {
 		super();
+		setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		this.ventana=v;
 		setLayout(null);
 		
@@ -28,34 +30,44 @@ public class Principal extends JPanel{
 		add(label);
 		
 		JButton btnCoches = new JButton("COCHES");
+		btnCoches.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnCoches.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventana.cargaCoches();
+			}
+		});
 		btnCoches.setBorder(new LineBorder(Color.RED));
 		btnCoches.setBounds(92, 99, 95, 48);
 		add(btnCoches);
 		
 		JButton btnClientes = new JButton("CLIENTES");
+		btnClientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClientes.setBorder(new LineBorder(Color.ORANGE));
 		btnClientes.setBounds(252, 99, 95, 48);
 		add(btnClientes);
 		
 		JButton btnParking = new JButton("PARKING");
+		btnParking.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnParking.setBorder(new LineBorder(new Color(139, 0, 0)));
 		btnParking.setBounds(92, 184, 95, 48);
 		add(btnParking);
 		
 		JButton btnAlquiler = new JButton("ALQUILER");
+		btnAlquiler.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAlquiler.setBorder(new LineBorder(Color.BLUE));
 		btnAlquiler.setBounds(252, 184, 95, 48);
 		add(btnAlquiler);
 		
-		Button button = new Button("SALIR");
-		button.addMouseListener(new MouseAdapter() {
+		JButton btnVolver = new JButton("VOLVER");
+		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void mouseClicked(MouseEvent e) {
 				ventana.cargaPantallaInicio();
 			}
 		});
-		button.setBounds(370, 248, 70, 22);
-		add(button);
+		btnVolver.setBounds(351, 246, 89, 23);
+		add(btnVolver);
 
 }	
 }

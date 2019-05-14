@@ -61,6 +61,7 @@ public class PantallaInicio extends JPanel{
 		add(lblBienvenidoAlSistema);
 		
 		JButton btnEliminarUsuario = new JButton("ELIMINAR USUARIO");
+		btnEliminarUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminarUsuario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

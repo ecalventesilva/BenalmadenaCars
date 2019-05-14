@@ -33,7 +33,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class Registro extends JPanel{
+public class RegistroUsuario extends JPanel{
 	private Ventana ventana;
 	private JTextField campoUsuario;
 	private JTextField campoDni;
@@ -41,7 +41,7 @@ public class Registro extends JPanel{
 	private JPasswordField campoPassword;
 	private Connection conec;
 	
-	public Registro(Ventana v) {
+	public RegistroUsuario(Ventana v) {
 		super();
 		this.ventana=v;
 		setBackground(new Color(245, 245, 220));
