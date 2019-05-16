@@ -24,6 +24,7 @@ public class Ventana extends JFrame{
 	private Ventana ventana;
 	private Coches coches;
 	private RegistroCoche registroCoche;
+	private DeleteCar deleteCar;
 	
 public Ventana() {
 		super();
@@ -141,7 +142,7 @@ public void cargaCoches() {
 		this.coches=new Coches(this);
 	}
 	this.principal.setVisible(false);
-	this.setSize(500,530);
+	this.setSize(550,580);
 	this.setContentPane(this.coches);
 	this.coches.setVisible(true);
 	this.setTitle("Coches");
@@ -158,4 +159,17 @@ public void cargaRegistroCoche() {
 	this.setTitle("Registar Coche");
 }
 
+
+public void cargaDeleteCar() {
+	if(this.deleteCar==null) {
+		this.deleteCar=new DeleteCar(this);
+	
+}
+	this.coches.setVisible(false);
+	this.setSize(450,350);
+	this.setContentPane(this.deleteCar);
+	this.deleteCar.setVisible(true);
+	this.setTitle("Eliminar Coche");
+	
+}
 }

@@ -15,12 +15,17 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 import benalmadenacars.BenalmadenaCars;
+import clases.Usuario;
+import exceptions.DniInvalidoException;
+import exceptions.LicenciaInvalidaException;
 
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
 import java.sql.Statement;
@@ -84,41 +89,67 @@ public class DeleteUser extends JPanel{
 		JButton btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {	
+			public void mouseClicked(MouseEvent arg0) {
 				ventana.conectarBd();
 				try {
 					String username=campoUsuario.getText();
 		            String password=String.copyValueOf(campoPassword.getPassword());
 		            String password2=String.copyValueOf(campoPassword2.getPassword());
-		     
-		            if (password.equals(password2)) {
-		            	if(!password.equals("")&&!password2.equals("")&&!username.equals("")) {
-		                Statement deleteStatement = ventana.getConnection().createStatement();
-		                deleteStatement.executeUpdate(
-		                        "delete from usuario where nombre=('" + username + "');");
-		                deleteStatement.close();
-		                JOptionPane.showMessageDialog(ventana, "¡Usuario eliminado con éxito!","User Delete",JOptionPane.INFORMATION_MESSAGE);
-		                
-		                ventana.cargaPantallaInicio();
-		                
-		            	}else {
-		            		JOptionPane.showMessageDialog(ventana, "Por favor, rellene todos los campos para eliminar usuario","",JOptionPane.ERROR_MESSAGE);
-		            	}
-		            	
-		            	}else{
-		            	JOptionPane.showMessageDialog(ventana, "Error: las contraseñas introducidas no coinciden","ERROR",JOptionPane.ERROR_MESSAGE);
-		            }
+		            PreparedStatement loginStatement
+                    = ventana.getConnection().prepareStatement(
+                            "select * from usuario where nombre='"+username+"' "
+                            + "and password ='"+password+"' ");
+			            ResultSet foundUser = loginStatement.executeQuery();
+			           if(foundUser.next()) {
+			        	   try {
+			        		   Usuario nombre=new Usuario(foundUser.getString("nombre"),foundUser.getString("password"),foundUser.getString("dni"),foundUser.getInt("licencia"));
+			        		   
+					            	
+					            		if(password.equals(foundUser.getString("password"))) {
+				
+							                Statement deleteStatement = ventana.getConnection().createStatement();
+							                deleteStatement.executeUpdate(
+							                        "delete from usuario where nombre=('" + username +"') and password=('" + password + "');");
+							                deleteStatement.close();
+							                JOptionPane.showMessageDialog(ventana, "¡Usuario eliminado con éxito!","User Delete",JOptionPane.INFORMATION_MESSAGE);
+							                
+							                ventana.cargaPantallaInicio();
+
+					            
+							} }catch (DniInvalidoException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (LicenciaInvalidaException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+			           } else {
+			        	   
+			        		   
+			        		   
+			        	   if(!password.equals("")&&!password2.equals("")&&!username.equals("")) {
+			        		   if (password.equals(password2)) {
+			        			   JOptionPane.showMessageDialog(ventana, "Usuario o contraseña incorrecta","ERROR",JOptionPane.ERROR_MESSAGE);
+				        	   }else {
+				        		   JOptionPane.showMessageDialog(ventana, "Error: las contraseñas introducidas no coinciden","ERROR",JOptionPane.ERROR_MESSAGE);
+			        		   
+			        		   
+			        	   } }else { 
+			        		   JOptionPane.showMessageDialog(ventana, "Por favor, rellene todos los campos para eliminar usuario","",JOptionPane.ERROR_MESSAGE);
+			        	   
+			           }
+			        	   }
+		           
 		            campoUsuario.setText("");
 		            campoPassword.setText("");
 		            campoPassword2.setText("");
 		            
-				 }catch (SQLException ex) {
-			            ex.printStackTrace();
-				
-				 }
-				 
-				}
+				 } catch (Exception e) {
+					 e.getStackTrace();
+				 } 
+			}
 		});
+		
 		btnEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminar.setBorder(new LineBorder(new Color(255, 0, 0)));
 		btnEliminar.setForeground(new Color(0, 0, 0));
@@ -138,7 +169,9 @@ public class DeleteUser extends JPanel{
 		add(btnCancelar);
 
 		
+		
+	}
 }
 	
 
-}
+

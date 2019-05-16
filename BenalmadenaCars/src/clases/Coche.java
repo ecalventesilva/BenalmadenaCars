@@ -18,7 +18,21 @@ public class Coche {
     private float precio_dia;
     
 
-    public enum color{
+    public Coche(String marca, String modelo, String matricula, String color, String tipo, String motor,
+			String descripcion, float precio_dia) {
+		super();
+		this.marca = marca;
+		this.modelo = modelo;
+		this.matricula = matricula;
+		this.color = color;
+		this.tipo = tipo;
+		this.motor = motor;
+		this.descripcion = descripcion;
+		this.precio_dia = precio_dia;
+	}
+
+
+	public enum color{
         NEGRO,
         PLATA,
         BLANCO,

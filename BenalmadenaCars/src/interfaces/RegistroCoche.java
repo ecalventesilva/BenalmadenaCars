@@ -7,7 +7,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
@@ -18,6 +23,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import clases.Coche.tipo;
+import javafx.scene.control.ComboBox;
+import clases.Usuario;
+import clases.Coche;
 import clases.Coche.color;
 import java.awt.Cursor;
 
@@ -26,6 +34,9 @@ public class RegistroCoche extends JPanel{
 private Ventana ventana;
 private JTextField campoMatricula;
 private JTextField campoDescripcion;
+private JTextField campoMarca;
+private JTextField campoModelo;
+private JTextField campoPrecio;
 	
 	public RegistroCoche(Ventana v) {
 	super();
@@ -138,7 +149,59 @@ private JTextField campoDescripcion;
 	comboBoxColor.setBounds(163, 209, 96, 20);
 	add(comboBoxColor);
 	
-
-
+	campoMarca = new JTextField();
+	campoMarca.setColumns(10);
+	campoMarca.setBounds(163, 107, 186, 20);
+	add(campoMarca);
+	
+	campoModelo = new JTextField();
+	campoModelo.setColumns(10);
+	campoModelo.setBounds(163, 141, 186, 20);
+	add(campoModelo);
+	
+	campoPrecio = new JTextField();
+	campoPrecio.setColumns(10);
+	campoPrecio.setBounds(163, 343, 186, 20);
+	add(campoPrecio);
+	
+	btnGuardar.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			//Coger todos los valores de los campos
+			 ventana.conectarBd();
+	            try {
+	            	String marca=campoMarca.getText();
+	    			String modelo=campoModelo.getText();
+	    			String matricula=campoMatricula.getText();
+	    			String color=comboBoxColor.getSelectedItem().toString();
+	    			String tipo=comboBoxTipo.getSelectedItem().toString();
+	    			String motor="";
+	    			
+	    			if (rdbtnDiesel.isEnabled()) {
+	    				motor="Diesel";
+	    			} else if (rdbtnGasolina.isEnabled()) {
+	    				motor="Gasolina";
+	    			}
+	    			
+	    			String descripcion=campoDescripcion.getText();
+	    			float precio =Float.parseFloat(campoPrecio.getText());
+	    			Coche actual = new Coche(marca, modelo, matricula,color,tipo,motor,descripcion,precio);
+	    			Statement registerStatement = ventana.getConnection().createStatement();
+	    		    registerStatement.executeUpdate(
+		                    "insert into coches (marca,modelo,matricula,color,tipo,motor,descripcion,precio"
+		                    + ") values('" + marca + "',"
+		                    + "'" + modelo + "','" + matricula
+		                    + "','" +color+ "','"+tipo+"','"+motor+"','"+descripcion+"','"+precio+"');");
+		            registerStatement.close();
+		            JOptionPane.showMessageDialog(ventana, "El coche con matricula: ''"+matricula+"'',"+" ha sido registrado con exito","",JOptionPane.INFORMATION_MESSAGE);
+	    			ventana.cargaCoches();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			//crear statement
+			//executeUpdate("insert into coches values(......)
+		}
+	});
 }	
 }
