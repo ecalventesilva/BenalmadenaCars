@@ -143,6 +143,7 @@ public void cargaCoches() {
 	}
 	this.principal.setVisible(false);
 	this.setSize(550,580);
+	this.setLocation(450,50);
 	this.setContentPane(this.coches);
 	this.coches.setVisible(true);
 	this.setTitle("Coches");
@@ -167,6 +168,7 @@ public void cargaDeleteCar() {
 }
 	this.coches.setVisible(false);
 	this.setSize(450,350);
+	this.setLocation(450,180);
 	this.setContentPane(this.deleteCar);
 	this.deleteCar.setVisible(true);
 	this.setTitle("Eliminar Coche");

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -18,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DeleteCar extends JPanel{
 	private Ventana ventana;
@@ -44,11 +46,11 @@ public class DeleteCar extends JPanel{
 		
 		JLabel textMatricula = new JLabel("Matrícula");
 		textMatricula.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textMatricula.setBounds(64, 129, 75, 14);
+		textMatricula.setBounds(76, 149, 75, 14);
 		add(textMatricula);
 		
 		campoMatricula = new JTextField();
-		campoMatricula.setBounds(215, 127, 158, 20);
+		campoMatricula.setBounds(227, 147, 158, 20);
 		add(campoMatricula);
 		campoMatricula.setColumns(10);
 		
@@ -58,37 +60,35 @@ public class DeleteCar extends JPanel{
 			public void mouseClicked(MouseEvent arg0) {
 				ventana.conectarBd();
 				String matricula=campoMatricula.getText();
-				PreparedStatement loginStatement = null;
+				Statement deleteStatement = null;
 				try {
-					loginStatement = ventana.getConnection().prepareStatement(
-					        "select * from coches where matricula='"+matricula+"' ");
+					deleteStatement = ventana.getConnection().createStatement();	  
+		                deleteStatement.executeUpdate(
+		                        "delete from coches where matricula=('" + matricula +"');");
+		                deleteStatement.close();
+		                JOptionPane.showMessageDialog(ventana, "¡El coche con matrícula: "+matricula+" ha sido eliminado con éxito!","Coche eliminado",JOptionPane.INFORMATION_MESSAGE);
+		                ventana.cargaCoches();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
-		            ResultSet foundCar = null;
-					try {
-						foundCar = loginStatement.executeQuery();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-		            try {
-						if(foundCar.next()) {
-							Coche user=new Coche(foundCar.getString("marca"),foundCar.getString("modelo"),
-									foundCar.getString("matricula"),foundCar.getString("color"),foundCar.getString("tipo"),
-									foundCar.getString("motor"),foundCar.getString("descripcion"),foundCar.getFloat("precio"));
-						}
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				
+				 campoMatricula.setText("");
+		          
 			}
 		});
-		btnEliminar.setBounds(178, 266, 89, 23);
+		btnEliminar.setBounds(234, 219, 109, 23);
 		add(btnEliminar);
 		
+		JButton bttCancelar = new JButton("CANCELAR");
+		bttCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ventana.cargaCoches();
+			}
+		});
+		bttCancelar.setBounds(113, 219, 111, 23);
+		add(bttCancelar);
+		
 	}
-
 }

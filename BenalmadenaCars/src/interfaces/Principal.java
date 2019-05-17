@@ -34,6 +34,7 @@ public class Principal extends JPanel{
 		btnCoches.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+		
 				ventana.cargaCoches();
 			}
 		});

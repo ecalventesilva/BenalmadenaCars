@@ -72,10 +72,10 @@ private JTextField campoPrecio;
 	lblModelo.setBounds(53, 139, 96, 23);
 	add(lblModelo);
 	
-	JLabel lblMatrcula = new JLabel("MATR\u00CDCULA");
-	lblMatrcula.setFont(new Font("Tahoma", Font.BOLD, 12));
-	lblMatrcula.setBounds(53, 173, 96, 23);
-	add(lblMatrcula);
+	JLabel lblMatricula = new JLabel("MATR\u00CDCULA");
+	lblMatricula.setFont(new Font("Tahoma", Font.BOLD, 12));
+	lblMatricula.setBounds(53, 173, 96, 23);
+	add(lblMatricula);
 	
 	JLabel lblColor = new JLabel("COLOR");
 	lblColor.setFont(new Font("Tahoma", Font.BOLD, 12));

@@ -9,9 +9,12 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import javax.swing.border.LineBorder;
+
+import com.mysql.cj.xdevapi.Statement;
 
 import clases.Coche;
 
@@ -22,6 +25,9 @@ import javax.swing.BoxLayout;
 
 public class Coches extends JPanel{
 	private Ventana ventana;
+	private Statement stmte;
+	public Connection connection;
+
 	ArrayList<Coche> coches;
 	
 	public Coches(Ventana v) {
@@ -58,6 +64,8 @@ public class Coches extends JPanel{
 	panel.setBounds(39, 100, 290, 442);
 	add(panel);
 	panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+	
+		//if(Coches.)
 	
 	/*for(int i=0;i<coches.size();i++) {
 		new JButton a=
@@ -99,6 +107,31 @@ public class Coches extends JPanel{
 	});
 	btnEliminarCoche.setBounds(367, 484, 161, 23);
 	add(btnEliminarCoche);
+	
+	JButton btnRefresh = new JButton("New button");
+	btnRefresh.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			panel.removeAll();
+			//if(Class.Coche!=null) {	
+			//}
+			
+			stmte=connection.createStatement();
+			ResultSet rst= stmte.executeQuery("select * from coches");
+			
+			while(rst.next()) {
+				Coche car=new Coche(rst.getString("marca"),rst.getString("modelo"),rst.getString("matricula"),rst.getString("color"),
+						rst.getString("tipo"),rst.getString("motor"),rst.getString("descripcio"),rst.getString("precio"));
+				
+				JButton btnNewButton_1 = new JButton(car.getMarca());
+				btnNewButton_1.setMaximumSize(new Dimension(panel.getWidth(),40));
+				panel.add(btnNewButton_1);
+				
+			}
+		}
+	});
+	btnRefresh.setBounds(297, 85, 22, 15);
+	add(btnRefresh);
 
 }	
 }
