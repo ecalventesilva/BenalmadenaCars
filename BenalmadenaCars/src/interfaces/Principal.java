@@ -11,16 +11,22 @@ import java.awt.Button;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
+
+import jdk.nashorn.internal.runtime.ListAdapter;
+
 import java.awt.Cursor;
 
 public class Principal extends JPanel{
 	private Ventana ventana;
+	private PantallaCoches coche;
 	
 	public Principal(Ventana v) {
 		super();
 		setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		this.ventana=v;
+		this.coche=new PantallaCoches(v);
 		setLayout(null);
+		ventana.conectarBd();
 		
 		JLabel label = new JLabel("BENALM\u00C1DENA CARS SL");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -34,8 +40,9 @@ public class Principal extends JPanel{
 		btnCoches.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-		
+				coche.listaCoches();
 				ventana.cargaCoches();
+				
 			}
 		});
 		btnCoches.setBorder(new LineBorder(Color.RED));
@@ -43,6 +50,12 @@ public class Principal extends JPanel{
 		add(btnCoches);
 		
 		JButton btnClientes = new JButton("CLIENTES");
+		btnClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventana.cargaPantallaClientes();
+			}
+		});
 		btnClientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClientes.setBorder(new LineBorder(Color.ORANGE));
 		btnClientes.setBounds(252, 99, 95, 48);

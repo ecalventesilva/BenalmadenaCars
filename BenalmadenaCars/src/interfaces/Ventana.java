@@ -22,9 +22,11 @@ public class Ventana extends JFrame{
 	private DeleteUser deleteUser;
 	public Connection connection;
 	private Ventana ventana;
-	private Coches coches;
+	private PantallaCoches coches;
 	private RegistroCoche registroCoche;
 	private DeleteCar deleteCar;
+	private PantallaClientes pantallaClientes;
+	private RegistroClientes registroClientes;
 	
 public Ventana() {
 		super();
@@ -138,9 +140,7 @@ public Usuario conectarBd() {
 	
 }
 public void cargaCoches() {
-	if(this.coches==null) {
-		this.coches=new Coches(this);
-	}
+	this.coches=new PantallaCoches(this);
 	this.principal.setVisible(false);
 	this.setSize(550,580);
 	this.setLocation(450,50);
@@ -174,4 +174,26 @@ public void cargaDeleteCar() {
 	this.setTitle("Eliminar Coche");
 	
 }
+public void cargaPantallaClientes() {
+	if(this.pantallaClientes==null) {
+		this.pantallaClientes=new PantallaClientes(this);
+	
 }
+	this.principal.setVisible(false);
+	this.setSize(550,580);
+	this.setLocation(450,50);
+	this.setContentPane(this.pantallaClientes);
+	this.principal.setVisible(true);
+	this.setTitle("Clientes");
+}
+public void cargaPantallaRegistroClientes() {
+	if(this.registroClientes==null) {
+		this.registroClientes=new RegistroClientes(this);
+	
+}
+	this.pantallaClientes.setVisible(false);
+	this.setSize(450,530);
+	this.setContentPane(this.registroClientes);
+	this.registroClientes.setVisible(true);
+	this.setTitle("Registar Cliente");
+}}

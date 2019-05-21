@@ -4,40 +4,58 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.border.LineBorder;
 
-import com.mysql.cj.xdevapi.Statement;
 
 import clases.Coche;
+import clases.Coche.color;
+import clases.Coche.motor;
+import clases.Coche.tipo;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 
-public class Coches extends JPanel{
+public class PantallaCoches extends JPanel{
 	private Ventana ventana;
-	private Statement stmte;
-	public Connection connection;
-
+	private Statement s;
+	public Connection c;
+	private JPanel panel;
 	ArrayList<Coche> coches;
 	
-	public Coches(Ventana v) {
+	public PantallaCoches(Ventana v) {
 	super();
-	coches=new ArrayList<Coche>();
+	try {
+		c=DriverManager.getConnection(
+				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+	} catch(SQLNonTransientConnectionException ex) {
+		//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
+	} catch (SQLException ex) {
+		JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
+	            ex.printStackTrace();
+	}
 	//crear statement 
 	//executeQuery(Select * from coches
 	//while(resultset.next){
 		//coches.add(new Coche(los datos que vienen de base de datos)
 	//}
+	
 	this.ventana=v;
 	setBackground(new Color(245, 245, 220));
 	setLayout(null);
@@ -59,7 +77,7 @@ public class Coches extends JPanel{
 	btnAtrs.setBounds(404, 519, 92, 23);
 	add(btnAtrs);
 	
-	JPanel panel = new JPanel();
+	 panel = new JPanel();
 	panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 	panel.setBounds(39, 100, 290, 442);
 	add(panel);
@@ -73,13 +91,6 @@ public class Coches extends JPanel{
 		//Evento al boton a para que al pulsarlo te cargue el panel de descripción de un solo coche (Pasarle un objeto coche por constructor)
 	}*/
 	
-	JButton btnNewButton_1 = new JButton("New button");
-	btnNewButton_1.setMaximumSize(new Dimension(panel.getWidth(),40));
-	panel.add(btnNewButton_1);
-	
-	JButton btnNewButton = new JButton("New button");
-	btnNewButton.setSize(panel.getWidth(),40);
-	panel.add(btnNewButton);
 	
 	JLabel lblListaDeCoches = new JLabel("LISTA DE COCHES");
 	lblListaDeCoches.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -108,30 +119,57 @@ public class Coches extends JPanel{
 	btnEliminarCoche.setBounds(367, 484, 161, 23);
 	add(btnEliminarCoche);
 	
-	JButton btnRefresh = new JButton("New button");
-	btnRefresh.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			panel.removeAll();
-			//if(Class.Coche!=null) {	
-			//}
+	panel.removeAll();
+	coches=new ArrayList<Coche>();
+	
+		try {
+			s=c.createStatement();
+			ResultSet rst= s.executeQuery("select * from coches");
+	
+	
+		while(rst.next()) {
+			Coche car=new Coche(rst.getString("marca"),rst.getString("modelo"),rst.getString("matricula"),rst.getString("color"),
+					rst.getString("tipo"),rst.getString("motor"),rst.getString("descripcion"),rst.getFloat("precio"));
 			
-			stmte=connection.createStatement();
-			ResultSet rst= stmte.executeQuery("select * from coches");
-			
+			CocheListado cl=new CocheListado(car);
+			panel.add(cl);
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	
+	panel.setVisible(false);
+	panel.setVisible(true);
+
+}	
+	public void listaCoches() {
+		panel.removeAll();
+		coches=new ArrayList<Coche>();
+		if(coches!=null) {	
+		
+			try {
+				s=c.createStatement();
+				ResultSet rst= s.executeQuery("select * from coches");
+		
+		
 			while(rst.next()) {
 				Coche car=new Coche(rst.getString("marca"),rst.getString("modelo"),rst.getString("matricula"),rst.getString("color"),
-						rst.getString("tipo"),rst.getString("motor"),rst.getString("descripcio"),rst.getString("precio"));
+						rst.getString("tipo"),rst.getString("motor"),rst.getString("descripcion"),rst.getFloat("precio"));
 				
 				JButton btnNewButton_1 = new JButton(car.getMarca());
 				btnNewButton_1.setMaximumSize(new Dimension(panel.getWidth(),40));
 				panel.add(btnNewButton_1);
-				
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	});
-	btnRefresh.setBounds(297, 85, 22, 15);
-	add(btnRefresh);
+			
+		}
+		panel.setVisible(false);
+		panel.setVisible(true);
+	}
+	}
 
-}	
-}
