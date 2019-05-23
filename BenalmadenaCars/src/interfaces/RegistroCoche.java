@@ -37,6 +37,10 @@ private JTextField campoDescripcion;
 private JTextField campoMarca;
 private JTextField campoModelo;
 private JTextField campoPrecio;
+private JComboBox comboBoxColor;
+private JComboBox comboBoxMarca;
+private JRadioButton rdbtnDiesel;
+private JRadioButton rdbtnGasolina;
 	
 	public RegistroCoche(Ventana v) {
 	super();
@@ -47,12 +51,6 @@ private JTextField campoPrecio;
 	JButton btnAtras = new JButton("ATRAS");
 	btnAtras.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	btnAtras.setOpaque(false);
-	btnAtras.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			ventana.cargaCoches();
-		}
-	});
 	btnAtras.setBounds(338, 415, 89, 23);
 	add(btnAtras);
 	
@@ -118,14 +116,13 @@ private JTextField campoPrecio;
 	add(lblMotor);
 	
 	JRadioButton rdbtnDiesel = new JRadioButton("Diesel\r\n");
+	rdbtnDiesel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	rdbtnDiesel.setOpaque(false);
 	rdbtnDiesel.setBounds(179, 272, 96, 32);
 	add(rdbtnDiesel);
-	
-	
-	
-	
+
 	JRadioButton rdbtnGasolina = new JRadioButton("Gasolina");
+	rdbtnGasolina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	rdbtnGasolina.setOpaque(false);
 	rdbtnGasolina.setBounds(277, 272, 89, 32);
 	add(rdbtnGasolina);
@@ -140,11 +137,13 @@ private JTextField campoPrecio;
 	add(lblRegistroNuevoCoche);
 	
 	JComboBox comboBoxTipo = new JComboBox();
+	comboBoxTipo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	comboBoxTipo.setModel(new DefaultComboBoxModel(tipo.values()));
 	comboBoxTipo.setBounds(163, 243, 96, 20);
 	add(comboBoxTipo);
 	
 	JComboBox comboBoxColor = new JComboBox();
+	comboBoxColor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	comboBoxColor.setModel(new DefaultComboBoxModel(color.values()));
 	comboBoxColor.setBounds(163, 209, 96, 20);
 	add(comboBoxColor);
@@ -163,6 +162,22 @@ private JTextField campoPrecio;
 	campoPrecio.setColumns(10);
 	campoPrecio.setBounds(163, 343, 186, 20);
 	add(campoPrecio);
+	
+	btnAtras.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			ventana.cargaCoches();
+			campoMarca.setText("");
+			campoModelo.setText("");
+			campoMatricula.setText("");
+			campoDescripcion.setText("");
+			campoPrecio.setText("");
+			comboBoxColor.setSelectedIndex(0);
+			comboBoxTipo.setSelectedIndex(0);
+			//rdbtnDiesel.rews                        FALTA AVERIGUAR COMO REESTABLECER ESTOS SELECTORES
+			//rdbtnGasolina.setSelected(false);
+		}
+	});
 	
 	btnGuardar.addMouseListener(new MouseAdapter() {
 		@Override
@@ -194,11 +209,19 @@ private JTextField campoPrecio;
 		                    + "','" +color+ "','"+tipo+"','"+motor+"','"+descripcion+"','"+precio+"');");
 		            registerStatement.close();
 		            JOptionPane.showMessageDialog(ventana, "El coche con matricula: ''"+matricula+"'',"+" ha sido registrado con exito","",JOptionPane.INFORMATION_MESSAGE);
-	    			ventana.cargaCoches();
+	
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	            ventana.cargaCoches();
+    			campoMarca.setText("");
+    			campoModelo.setText("");
+    			campoMatricula.setText("");
+    			campoDescripcion.setText("");
+    			campoPrecio.setText("");
+    			comboBoxColor.setSelectedIndex(0);
+    			comboBoxTipo.setSelectedIndex(0);
 			//crear statement
 			//executeUpdate("insert into coches values(......)
 		}

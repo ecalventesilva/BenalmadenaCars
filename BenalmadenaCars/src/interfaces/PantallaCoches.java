@@ -110,6 +110,7 @@ public class PantallaCoches extends JPanel{
 	add(btnRegisterNewCar);
 	
 	JButton btnEliminarCoche = new JButton("ELIMINAR COCHE");
+	btnEliminarCoche.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	btnEliminarCoche.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
