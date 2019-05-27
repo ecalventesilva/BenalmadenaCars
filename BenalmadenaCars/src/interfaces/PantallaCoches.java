@@ -36,7 +36,7 @@ public class PantallaCoches extends JPanel{
 	private Ventana ventana;
 	private Statement s;
 	public Connection c;
-	private JPanel panel;
+	JPanel panel;
 	ArrayList<Coche> coches;
 	
 	public PantallaCoches(Ventana v) {
@@ -77,7 +77,7 @@ public class PantallaCoches extends JPanel{
 	btnAtrs.setBounds(404, 519, 92, 23);
 	add(btnAtrs);
 	
-	 panel = new JPanel();
+	panel = new JPanel();
 	panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 	panel.setBounds(39, 100, 290, 442);
 	add(panel);
@@ -114,7 +114,8 @@ public class PantallaCoches extends JPanel{
 	btnEliminarCoche.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			ventana.cargaDeleteCar();
+			panel.setVisible(false);
+			ventana.cargaInfoCar();
 		}
 	});
 	btnEliminarCoche.setBounds(367, 484, 161, 23);

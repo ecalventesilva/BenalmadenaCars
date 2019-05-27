@@ -21,11 +21,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DeleteCar extends JPanel{
+public class InfoCar extends JPanel{
 	private Ventana ventana;
 	private JTextField campoMatricula;
 	
-	public DeleteCar(Ventana v) {
+	public InfoCar(Ventana v) {
 		super();
 		this.ventana=v;
 		setBackground(new Color(245, 245, 220));

@@ -39,23 +39,26 @@ public class CocheListado extends JPanel {
 		JButton botonCoche = new JButton(c.getMarca());
 		add(botonCoche);
 		
-		JButton botonEliminar = new JButton("X");
-		add(botonEliminar, BorderLayout.EAST);
 		botonCoche.addMouseListener(new MouseAdapter() {
-
+		
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println(coche.getMarca());
+				ventana.cargaInfoCar();
 			}
-			
 		});
+		
+
+		JButton botonEliminar = new JButton("X");
+		add(botonEliminar, BorderLayout.EAST);
+		
 		botonEliminar.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Eliminar "+coche.getMarca());
 				
-				int reply = JOptionPane.showConfirmDialog(ventana, "¿Está seguro que desea eliminar el coche "+c.getMarca()+"?", "Mensaje", JOptionPane.YES_NO_OPTION);
+				int reply = JOptionPane.showConfirmDialog(ventana, "¿Está seguro que desea eliminar el coche "+c.getMarca()+" con matricula: "
+						+c.getMatricula()+ "?", "Mensaje", JOptionPane.YES_NO_OPTION);
 		       
 				if (reply == JOptionPane.YES_OPTION) {
 		        	
@@ -65,7 +68,7 @@ public class CocheListado extends JPanel {
 			                deleteStatement.executeUpdate(
 			                        "delete from coches where marca=('" + c.getMarca() +"');");
 			                deleteStatement.close();
-			                JOptionPane.showMessageDialog(ventana, "El coche con matricula "+c.getMatricula()+" ha sido eliminado con éxito");  
+			                JOptionPane.showMessageDialog(ventana, "El coche "+c.getMarca()+" con matricula"+c.getMatricula()+" ha sido eliminado con éxito");  
 			                
 					} catch (SQLException ex) {
 						// TODO Auto-generated catch block
@@ -74,7 +77,7 @@ public class CocheListado extends JPanel {
 		          
 		        }
 		        else {
-		           JOptionPane.showMessageDialog(ventana, "El coche con matricula "+ c.getMatricula()+" no ha sido eliminado");
+		           JOptionPane.showMessageDialog(ventana, "El coche "+c.getMarca()+" con matricula "+ c.getMatricula()+" no ha sido eliminado");
 		           
 		        }
 				

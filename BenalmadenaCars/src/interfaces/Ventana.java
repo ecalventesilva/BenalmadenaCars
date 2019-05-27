@@ -23,8 +23,9 @@ public class Ventana extends JFrame{
 	public Connection connection;
 	private Ventana ventana;
 	private PantallaCoches coches;
+	private CocheListado cocheListado;
 	private RegistroCoche registroCoche;
-	private DeleteCar deleteCar;
+	private InfoCar infoCar;
 	private PantallaClientes pantallaClientes;
 	private RegistroClientes registroClientes;
 	
@@ -161,17 +162,20 @@ public void cargaRegistroCoche() {
 }
 
 
-public void cargaDeleteCar() {
-	if(this.deleteCar==null) {
-		this.deleteCar=new DeleteCar(this);
+public void cargaInfoCar() {
+	if(this.infoCar==null) {
+		this.infoCar=new InfoCar(this);
 	
 }
-	this.coches.setVisible(false);
+	if(this.coches!=null) {
+		this.coches.setVisible(false);
+	}
+	this.coches.panel.setVisible(false); // ERROR NO CARGA LA VENTANA INFOCAR.
 	this.setSize(450,350);
 	this.setLocation(450,180);
-	this.setContentPane(this.deleteCar);
-	this.deleteCar.setVisible(true);
-	this.setTitle("Eliminar Coche");
+	this.setContentPane(this.infoCar);
+	this.infoCar.setVisible(true);
+	this.setTitle("Información Coche");
 	
 }
 public void cargaPantallaClientes() {
