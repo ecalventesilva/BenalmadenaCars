@@ -1,6 +1,7 @@
 package interfaces;
 
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 import clases.Coche;
 
@@ -18,12 +19,12 @@ import java.sql.Statement;
 
 public class CocheListado extends JPanel {
 	private Coche coche;
+	private Connection conec;
 	private Ventana ventana;
-	public Connection conec;
 	
-	
-	public CocheListado(Coche c) {
+	public CocheListado(Coche c,Ventana v) {
 		super();
+		ventana=v;
 		try {
 			conec=DriverManager.getConnection(
 					"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
@@ -45,6 +46,7 @@ public class CocheListado extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				System.out.println(coche.getMarca());
 				ventana.cargaInfoCar();
+				
 			}
 		});
 		

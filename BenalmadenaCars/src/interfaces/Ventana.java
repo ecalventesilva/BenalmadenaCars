@@ -20,7 +20,7 @@ public class Ventana extends JFrame{
 	private Usuario usuario; 
 	private RegistroUsuario pantallaRegistro;
 	private DeleteUser deleteUser;
-	public Connection connection;
+	private Connection connection;
 	private Ventana ventana;
 	private PantallaCoches coches;
 	private CocheListado cocheListado;
@@ -170,7 +170,7 @@ public void cargaInfoCar() {
 	if(this.coches!=null) {
 		this.coches.setVisible(false);
 	}
-	this.coches.panel.setVisible(false); // ERROR NO CARGA LA VENTANA INFOCAR.
+	this.coches.panel.setVisible(false); 
 	this.setSize(450,350);
 	this.setLocation(450,180);
 	this.setContentPane(this.infoCar);

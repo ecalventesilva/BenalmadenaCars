@@ -35,10 +35,10 @@ import javax.swing.BoxLayout;
 public class PantallaCoches extends JPanel{
 	private Ventana ventana;
 	private Statement s;
-	public Connection c;
+	private Connection c;
 	JPanel panel;
 	ArrayList<Coche> coches;
-	
+	Coche car;
 	public PantallaCoches(Ventana v) {
 	super();
 	try {
@@ -50,11 +50,6 @@ public class PantallaCoches extends JPanel{
 		JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
 	            ex.printStackTrace();
 	}
-	//crear statement 
-	//executeQuery(Select * from coches
-	//while(resultset.next){
-		//coches.add(new Coche(los datos que vienen de base de datos)
-	//}
 	
 	this.ventana=v;
 	setBackground(new Color(245, 245, 220));
@@ -74,7 +69,7 @@ public class PantallaCoches extends JPanel{
 			ventana.cargaPrincipal();
 		}
 	});
-	btnAtrs.setBounds(404, 519, 92, 23);
+	btnAtrs.setBounds(367, 484, 161, 23);
 	add(btnAtrs);
 	
 	panel = new JPanel();
@@ -109,18 +104,6 @@ public class PantallaCoches extends JPanel{
 	btnRegisterNewCar.setBounds(367, 450, 161, 23);
 	add(btnRegisterNewCar);
 	
-	JButton btnEliminarCoche = new JButton("ELIMINAR COCHE");
-	btnEliminarCoche.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-	btnEliminarCoche.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			panel.setVisible(false);
-			ventana.cargaInfoCar();
-		}
-	});
-	btnEliminarCoche.setBounds(367, 484, 161, 23);
-	add(btnEliminarCoche);
-	
 	panel.removeAll();
 	coches=new ArrayList<Coche>();
 	
@@ -133,7 +116,7 @@ public class PantallaCoches extends JPanel{
 			Coche car=new Coche(rst.getString("marca"),rst.getString("modelo"),rst.getString("matricula"),rst.getString("color"),
 					rst.getString("tipo"),rst.getString("motor"),rst.getString("descripcion"),rst.getFloat("precio"));
 			
-			CocheListado cl=new CocheListado(car);
+			CocheListado cl=new CocheListado(car, v);
 			panel.add(cl);
 		}
 	} catch (SQLException e) {
@@ -146,18 +129,19 @@ public class PantallaCoches extends JPanel{
 	panel.setVisible(true);
 
 }	
+	
 	public void listaCoches() {
 		panel.removeAll();
 		coches=new ArrayList<Coche>();
 		if(coches!=null) {	
-		
+			
 			try {
 				s=c.createStatement();
 				ResultSet rst= s.executeQuery("select * from coches");
 		
 		
 			while(rst.next()) {
-				Coche car=new Coche(rst.getString("marca"),rst.getString("modelo"),rst.getString("matricula"),rst.getString("color"),
+				 car=new Coche(rst.getString("marca"),rst.getString("modelo"),rst.getString("matricula"),rst.getString("color"),
 						rst.getString("tipo"),rst.getString("motor"),rst.getString("descripcion"),rst.getFloat("precio"));
 				
 				JButton btnNewButton_1 = new JButton(car.getMarca());
@@ -173,5 +157,7 @@ public class PantallaCoches extends JPanel{
 		panel.setVisible(false);
 		panel.setVisible(true);
 	}
+
+	
 	}
 
