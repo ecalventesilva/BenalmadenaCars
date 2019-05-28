@@ -39,17 +39,8 @@ public class InfoCar extends JPanel{
 		this.ventana=v;
 		setBackground(new Color(245, 245, 220));
 		setLayout(null);
+		ventana.conectarBd();
 		
-		try {
-			conec=DriverManager.getConnection(
-					"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
-		} catch(SQLNonTransientConnectionException ex) {
-			//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
-		            ex.printStackTrace();
-		}
-		//coche=c;
 		
 		JLabel label = new JLabel("BENALM\u00C1DENA CARS SL");
 		label.setBounds(113, 11, 225, 48);
@@ -73,7 +64,24 @@ public class InfoCar extends JPanel{
 			}
 		});
 		add(bttCancelar);
+	/*	
+		coche=c;
+		JTextPane infoCar = new JTextPane();
+		infoCar.setBounds(96, 114, 269, 107);
+		infoCar.setText(coche.getMarca()+coche.getMatricula());;
+		add(infoCar);
+		System.out.println(coche.getMatricula());
 		
+		
+		infoCar.addMouseListener(new MouseAdapter() {
+	
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(coche.getMarca());
+				
+				
+			}
+		});
 	
 		
 		/*

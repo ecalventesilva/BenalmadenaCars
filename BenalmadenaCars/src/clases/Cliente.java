@@ -55,5 +55,15 @@ public class Cliente extends Persona {
     public void setDireccionResidencia(String direccionResidencia) {
         this.direccionResidencia = direccionResidencia;
     }
+
+	public Cliente(String nombre, String apellidos, String dni, int licencia, String nacionalidad,
+			LocalDate fechaNacimiento, String direccionSpain, String direccionResidencia)
+			throws DniInvalidoException, LicenciaInvalidaException {
+		super(nombre, apellidos, dni, licencia);
+		this.nacionalidad = nacionalidad;
+		this.fechaNacimiento = fechaNacimiento;
+		this.direccionSpain = direccionSpain;
+		this.direccionResidencia = direccionResidencia;
+	}
     
 }
