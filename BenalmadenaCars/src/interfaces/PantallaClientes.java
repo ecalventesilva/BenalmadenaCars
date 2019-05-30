@@ -70,6 +70,7 @@ public class PantallaClientes extends JPanel{
 		add(btnAtras);
 		
 		panel1 = new JPanel();
+		panel1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panel1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		panel1.setBounds(39, 100, 290, 442);
 		add(panel1);

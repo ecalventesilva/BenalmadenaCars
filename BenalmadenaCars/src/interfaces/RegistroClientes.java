@@ -112,11 +112,15 @@ public class RegistroClientes extends JPanel{
 			            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
 			            JOptionPane.showMessageDialog(ventana, "Has introducido un DNI erróneo","Error",JOptionPane.ERROR_MESSAGE);
 			            ex.getMessage();
-			           
+			            textFieldDni.setText("");
+			            ventana.cargaRegistroCoche();
+			            
 				 
 			        } catch (LicenciaInvalidaException e1) {
 			        	JOptionPane.showMessageDialog(ventana, "Has introducido un número de licencia inválido","Error",JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
+			        	e1.printStackTrace();
+			        	textFieldLicencia.setText("");
+			        	ventana.cargaRegistroCoche();
 					
 				}
 				

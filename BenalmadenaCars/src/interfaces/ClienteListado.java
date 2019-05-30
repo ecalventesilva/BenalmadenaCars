@@ -79,8 +79,7 @@ public class ClienteListado extends JPanel{
 		        else {
 		           JOptionPane.showMessageDialog(ventana, "El cliente "+cl.getNombre()+" "+cl.getApellidos()+" con dni "+ cl.getDni()+" no ha sido eliminado");
 		           
-		        }
-				ventana.cargaPrincipal();
+		        }	
 			}
 			
 		});

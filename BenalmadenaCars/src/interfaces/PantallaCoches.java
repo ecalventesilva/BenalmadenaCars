@@ -63,6 +63,7 @@ public class PantallaCoches extends JPanel{
 	add(btnAtrs);
 	
 	panel = new JPanel();
+	panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 	panel.setBounds(39, 100, 290, 442);
 	add(panel);
