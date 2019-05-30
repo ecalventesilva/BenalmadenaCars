@@ -2,6 +2,7 @@ package interfaces;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.border.LineBorder;
 
 import clases.Coche;
 
@@ -9,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -21,6 +23,7 @@ public class CocheListado extends JPanel {
 	private Coche coche;
 	private Connection conec;
 	private Ventana ventana;
+	private JTextPane infoCar;
 	
 	public CocheListado(Coche c,Ventana v) {
 		super();
@@ -28,12 +31,14 @@ public class CocheListado extends JPanel {
 		try {
 			conec=DriverManager.getConnection(
 					"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+			conec.close();
 		} catch(SQLNonTransientConnectionException ex) {
 			//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
 		            ex.printStackTrace();
 		}
+		
 		coche=c;
 		setLayout(new BorderLayout(0, 0));
 		this.setSize(290,50);
@@ -41,10 +46,12 @@ public class CocheListado extends JPanel {
 		add(botonCoche);
 		
 		botonCoche.addMouseListener(new MouseAdapter() {
-	
+			/**
+			 * MouseCliked: carga la ventana "INFOCAR".
+			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(coche.getMarca());
+				System.out.println(coche.getColor());
 				ventana.cargaInfoCar(coche);
 				
 			}

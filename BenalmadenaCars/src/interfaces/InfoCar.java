@@ -8,6 +8,7 @@ import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -35,6 +36,8 @@ public class InfoCar extends JPanel{
 	private CocheListado cocheListado;
 	private Connection conec;
 	private JTextPane infoCar;
+	private JScrollPane scrollPane;
+	
 	public InfoCar(Ventana v,Coche c) {
 		super();
 		this.ventana=v;
@@ -56,45 +59,39 @@ public class InfoCar extends JPanel{
 		lblEliminarUsuario.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		add(lblEliminarUsuario);
 		
+		
+		coche=c;
+		scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		infoCar = new JTextPane();
+		infoCar.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		infoCar.setBorder(new LineBorder(new Color(0, 0, 0)));
+		infoCar.setEditable(false);
+		infoCar.setBounds(96, 114, 269, 107);
+		infoCar.setText("Marca: "+coche.getMarca()+" "+"\n"+"Modelo: "+coche.getModelo()+"\nMatricula: "+coche.getMatricula()+"\nColor: "+coche.getColor()+
+				"\nTipo: "+coche.getTipo()+"\nMotor: "+coche.getMotor()+"\nDescripción: "+coche.getDescripcion()+"\nPrecio/día: "+coche.getPrecio_dia());
+		
+		scrollPane.setBounds(96, 114, 269, 107);
+		scrollPane.getViewport().setBackground(Color.WHITE);
+		scrollPane.getViewport().add(infoCar);
+		
+		add(scrollPane);
+		
+		/**
+		 * BOTÓN VOLVER: REGRESA A LA VENTANA "COCHES".
+		 */
 		JButton bttCancelar = new JButton("VOLVER");
 		bttCancelar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bttCancelar.setBounds(173, 266, 111, 23);
 		bttCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
 				ventana.cargaCoches();
-				infoCar.removeAll();
+				infoCar.setText("");
 			}
 		});
 		add(bttCancelar);
-		
-		coche=c;
-		infoCar = new JTextPane();
-		infoCar.setEditable(false);
-		infoCar.setBounds(96, 114, 269, 107);
-		infoCar.setText(coche.getMarca()+coche.getMatricula());;
-		add(infoCar);
-		System.out.println(coche.getMatricula());
-		
-		
-	/*	infoCar.addMouseListener(new MouseAdapter() {
-	
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println(coche.getMarca());
-				
-				
-			}
-		});*/
-	
-		
-		
-                                                      
-/*
-		JTextPane textPane = new JTextPane(); 
-		textPane.setBounds(65, 113, 299, 122);
-		textPane.setText(coche.getMarca()+coche.getMatricula());;
-		add(textPane);*/
+
 	}	
 }

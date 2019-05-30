@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import clases.Cliente;
 import clases.Coche;
 import clases.Usuario;
 
@@ -31,6 +32,7 @@ public class Ventana extends JFrame{
 	private RegistroClientes registroClientes;
 	private Coche coche;
 	private PantallaAlquiler alquiler;
+	private InfoCliente infoCliente;
 	
 public Ventana() {
 		super();
@@ -177,10 +179,8 @@ public void cargaRegistroCoche() {
 
 
 public void cargaInfoCar(Coche c) {
-	if(this.infoCar==null) {
-		this.infoCar=new InfoCar(this,c);
-	
-}
+	this.infoCar=new InfoCar(this,c);
+
 	if(this.coches!=null) {
 		this.coches.setVisible(false);
 	}
@@ -192,6 +192,21 @@ public void cargaInfoCar(Coche c) {
 	this.setTitle("Información Coche");
 	
 }
+public void cargaInfoCliente(Cliente cl) {
+	this.infoCliente=new InfoCliente(this,cl);
+
+	if(this.pantallaClientes!=null) {
+		this.pantallaClientes.setVisible(false);
+	}
+	this.pantallaClientes.panel1.setVisible(false); 
+	this.setSize(450,350);
+	this.setLocation(450,180);
+	this.setContentPane(this.infoCliente);
+	this.infoCliente.setVisible(true);
+	this.setTitle("Información Cliente");
+	
+}
+
 public void cargaPantallaClientes() {
 	this.pantallaClientes=new PantallaClientes(this);
 	this.principal.setVisible(false);
