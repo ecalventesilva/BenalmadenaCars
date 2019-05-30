@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JTextField;
+import java.awt.Cursor;
 
 public class RegistroClientes extends JPanel{
 	private Ventana ventana;
@@ -56,17 +57,28 @@ public class RegistroClientes extends JPanel{
 		add(lblRegistroNuevoCliente);
 		
 		JButton button = new JButton("ATRÁS");
+		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.cargaPantallaClientes();
+				ventana.cargaPantallaClientes();
+				textFieldNombre.setText("");
+				textFieldApellidos.setText("");
+				textFieldDni.setText("");
+				textFieldLicencia.setText("");
+				textFieldNacionalidad.setText("");
+				textFieldNacimiento.setText("");
+				textFieldDireccion.setText("");
+				textFieldResidencia.setText("");
 			}
 		});
 		button.setBounds(98, 415, 124, 23);
 		add(button);
 		
-		JButton button_1 = new JButton("CONFIRMAR");
-		button_1.addMouseListener(new MouseAdapter() {
+		JButton btnGuardar = new JButton("GUARDAR");
+		btnGuardar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.conectarBd();
@@ -120,8 +132,8 @@ public class RegistroClientes extends JPanel{
 		
 			
 			}});
-		button_1.setBounds(232, 415, 124, 23);
-		add(button_1);
+		btnGuardar.setBounds(232, 415, 124, 23);
+		add(btnGuardar);
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 12));

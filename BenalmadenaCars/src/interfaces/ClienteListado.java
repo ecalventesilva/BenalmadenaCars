@@ -1,13 +1,5 @@
 package interfaces;
 
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-
-import clases.Coche;
-
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,12 +9,19 @@ import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
 import java.sql.Statement;
 
-public class CocheListado extends JPanel {
-	private Coche coche;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import clases.Cliente;
+import clases.Coche;
+
+public class ClienteListado extends JPanel{
+	private Cliente cliente;
 	private Connection conec;
 	private Ventana ventana;
 	
-	public CocheListado(Coche c,Ventana v) {
+	public ClienteListado(Cliente cl,Ventana v) {
 		super();
 		ventana=v;
 		try {
@@ -34,22 +33,21 @@ public class CocheListado extends JPanel {
 			JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
 		            ex.printStackTrace();
 		}
-		coche=c;
+		cliente=cl;
 		setLayout(new BorderLayout(0, 0));
 		this.setSize(290,50);
-		JButton botonCoche = new JButton(c.getMarca());
-		add(botonCoche);
+		JButton botonCliente = new JButton(cl.getNombre()+" "+cl.getApellidos());
+		add(botonCliente);
 		
-		botonCoche.addMouseListener(new MouseAdapter() {
+		botonCliente.addMouseListener(new MouseAdapter() {
 	
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(coche.getMarca());
-				ventana.cargaInfoCar(coche);
+				System.out.println(cliente.getNombre());
+				//ventana.cargaInfoCliente();
 				
 			}
 		});
-		
 
 		JButton botonEliminar = new JButton("X");
 		add(botonEliminar, BorderLayout.EAST);
@@ -59,8 +57,8 @@ public class CocheListado extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				int reply = JOptionPane.showConfirmDialog(ventana, "¿Está seguro que desea eliminar el coche "+c.getMarca()+" con matricula: "
-						+c.getMatricula()+ "?", "Mensaje", JOptionPane.YES_NO_OPTION);
+				int reply = JOptionPane.showConfirmDialog(ventana, "¿Está seguro que desea eliminar el cliente "+cl.getNombre()+" "+cl.getApellidos()+" con dni: "
+						+cl.getDni()+ "?", "Mensaje", JOptionPane.YES_NO_OPTION);
 		       
 				if (reply == JOptionPane.YES_OPTION) {
 		        	
@@ -68,9 +66,9 @@ public class CocheListado extends JPanel {
 					try {
 						deleteStatement = conec.createStatement();	  
 			                deleteStatement.executeUpdate(
-			                        "delete from coches where marca=('" + c.getMarca() +"');");
+			                        "delete from clientes where nombre=('" + cl.getNombre() +"');");
 			                deleteStatement.close();
-			                JOptionPane.showMessageDialog(ventana, "El coche "+c.getMarca()+" con matricula"+c.getMatricula()+" ha sido eliminado con éxito");  
+			                JOptionPane.showMessageDialog(ventana, "El cliente "+cl.getNombre()+" "+cl.getApellidos()+" con dni "+cl.getDni()+" ha sido eliminado con éxito");  
 			                
 					} catch (SQLException ex) {
 						// TODO Auto-generated catch block
@@ -79,13 +77,13 @@ public class CocheListado extends JPanel {
 		          
 		        }
 		        else {
-		           JOptionPane.showMessageDialog(ventana, "El coche "+c.getMarca()+" con matricula "+ c.getMatricula()+" no ha sido eliminado");
+		           JOptionPane.showMessageDialog(ventana, "El cliente "+cl.getNombre()+" "+cl.getApellidos()+" con dni "+ cl.getDni()+" no ha sido eliminado");
 		           
 		        }
-				
+				ventana.cargaPrincipal();
 			}
 			
 		});
-	}
 	
-}
+	
+}}

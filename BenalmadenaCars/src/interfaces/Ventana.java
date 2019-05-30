@@ -30,6 +30,7 @@ public class Ventana extends JFrame{
 	private PantallaClientes pantallaClientes;
 	private RegistroClientes registroClientes;
 	private Coche coche;
+	private PantallaAlquiler alquiler;
 	
 public Ventana() {
 		super();
@@ -107,6 +108,7 @@ public void cargaPantallaInicio() {
 	this.pantallaInicio.setVisible(true);
 	this.setTitle("Bienvenido");
 }
+
 public void cargaPantallaRegistro() {
 	if(this.pantallaRegistro==null) {
 		this.pantallaRegistro=new RegistroUsuario(this);
@@ -151,6 +153,16 @@ public void cargaCoches() {
 	this.coches.setVisible(true);
 	this.setTitle("Coches");
 }
+public void cargaPantallaAlquiler() {
+	this.alquiler=new PantallaAlquiler(this);
+	this.principal.setVisible(false);
+	this.setSize(550,580);
+	this.setLocation(450,50);
+	this.setContentPane(this.alquiler);
+	this.alquiler.setVisible(true);
+	this.setTitle("Alquiler");
+	
+}
 
 public void cargaRegistroCoche() {
 	if(this.registroCoche==null) {
@@ -164,9 +176,9 @@ public void cargaRegistroCoche() {
 }
 
 
-public void cargaInfoCar() {
+public void cargaInfoCar(Coche c) {
 	if(this.infoCar==null) {
-		this.infoCar=new InfoCar(this);
+		this.infoCar=new InfoCar(this,c);
 	
 }
 	if(this.coches!=null) {
@@ -181,10 +193,7 @@ public void cargaInfoCar() {
 	
 }
 public void cargaPantallaClientes() {
-	if(this.pantallaClientes==null) {
-		this.pantallaClientes=new PantallaClientes(this);
-	
-}
+	this.pantallaClientes=new PantallaClientes(this);
 	this.principal.setVisible(false);
 	this.setSize(550,580);
 	this.setLocation(450,50);

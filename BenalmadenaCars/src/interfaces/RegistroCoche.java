@@ -222,8 +222,6 @@ private JRadioButton rdbtnGasolina;
     			campoPrecio.setText("");
     			comboBoxColor.setSelectedIndex(0);
     			comboBoxTipo.setSelectedIndex(0);
-			//crear statement
-			//executeUpdate("insert into coches values(......)
 		}
 	});
 }	

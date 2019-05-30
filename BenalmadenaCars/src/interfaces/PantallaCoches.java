@@ -41,16 +41,6 @@ public class PantallaCoches extends JPanel{
 	Coche car;
 	public PantallaCoches(Ventana v) {
 	super();
-	try {
-		c=DriverManager.getConnection(
-				"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
-	} catch(SQLNonTransientConnectionException ex) {
-		//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
-	} catch (SQLException ex) {
-		JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
-	            ex.printStackTrace();
-	}
-	
 	this.ventana=v;
 	setBackground(new Color(245, 245, 220));
 	setLayout(null);
@@ -104,56 +94,43 @@ public class PantallaCoches extends JPanel{
 	btnRegisterNewCar.setBounds(367, 450, 161, 23);
 	add(btnRegisterNewCar);
 	
-	panel.removeAll();
-	coches=new ArrayList<Coche>();
-	
-		try {
-			s=c.createStatement();
-			ResultSet rst= s.executeQuery("select * from coches");
-	
-	
-		while(rst.next()) {
-			Coche car=new Coche(rst.getString("marca"),rst.getString("modelo"),rst.getString("matricula"),rst.getString("color"),
-					rst.getString("tipo"),rst.getString("motor"),rst.getString("descripcion"),rst.getFloat("precio"));
-			
-			CocheListado cl=new CocheListado(car, v);
-			panel.add(cl);
-		}
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-		
-	
-	panel.setVisible(false);
-	panel.setVisible(true);
+	listaCoches();
 
 }	
 	
 	public void listaCoches() {
+
+		try {
+			c=DriverManager.getConnection(
+					"jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+		} catch(SQLNonTransientConnectionException ex) {
+			//this.dialogoError("Demasiadas conexiones sin cerrar","Hay demasiados usuarios conectados en este momento, por favor, inténtalo de nuevo más tarde");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(ventana, "La conexion a bd ha fallado","",JOptionPane.ERROR_MESSAGE);        
+		            ex.printStackTrace();
+		}
+		
 		panel.removeAll();
 		coches=new ArrayList<Coche>();
-		if(coches!=null) {	
-			
+		
 			try {
 				s=c.createStatement();
 				ResultSet rst= s.executeQuery("select * from coches");
 		
 		
 			while(rst.next()) {
-				 car=new Coche(rst.getString("marca"),rst.getString("modelo"),rst.getString("matricula"),rst.getString("color"),
+				Coche car=new Coche(rst.getString("marca"),rst.getString("modelo"),rst.getString("matricula"),rst.getString("color"),
 						rst.getString("tipo"),rst.getString("motor"),rst.getString("descripcion"),rst.getFloat("precio"));
 				
-				JButton btnNewButton_1 = new JButton(car.getMarca());
-				btnNewButton_1.setMaximumSize(new Dimension(panel.getWidth(),40));
-				panel.add(btnNewButton_1);
+				CocheListado cl=new CocheListado(car, ventana);
+				panel.add(cl);
 			}
+		c.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 			
-		}
 		panel.setVisible(false);
 		panel.setVisible(true);
 	}

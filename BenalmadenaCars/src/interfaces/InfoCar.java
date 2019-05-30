@@ -27,14 +27,15 @@ import java.sql.Statement;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
+import java.awt.Cursor;
 
 public class InfoCar extends JPanel{
 	private Ventana ventana;
 	private Coche coche;
 	private CocheListado cocheListado;
 	private Connection conec;
-	
-	public InfoCar(Ventana v) {
+	private JTextPane infoCar;
+	public InfoCar(Ventana v,Coche c) {
 		super();
 		this.ventana=v;
 		setBackground(new Color(245, 245, 220));
@@ -56,24 +57,28 @@ public class InfoCar extends JPanel{
 		add(lblEliminarUsuario);
 		
 		JButton bttCancelar = new JButton("VOLVER");
+		bttCancelar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bttCancelar.setBounds(173, 266, 111, 23);
 		bttCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
 				ventana.cargaCoches();
+				infoCar.removeAll();
 			}
 		});
 		add(bttCancelar);
-	/*	
+		
 		coche=c;
-		JTextPane infoCar = new JTextPane();
+		infoCar = new JTextPane();
+		infoCar.setEditable(false);
 		infoCar.setBounds(96, 114, 269, 107);
 		infoCar.setText(coche.getMarca()+coche.getMatricula());;
 		add(infoCar);
 		System.out.println(coche.getMatricula());
 		
 		
-		infoCar.addMouseListener(new MouseAdapter() {
+	/*	infoCar.addMouseListener(new MouseAdapter() {
 	
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -81,12 +86,12 @@ public class InfoCar extends JPanel{
 				
 				
 			}
-		});
+		});*/
 	
 		
-		/*
+		
                                                       
-
+/*
 		JTextPane textPane = new JTextPane(); 
 		textPane.setBounds(65, 113, 299, 122);
 		textPane.setText(coche.getMarca()+coche.getMatricula());;

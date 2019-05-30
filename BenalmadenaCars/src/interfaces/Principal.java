@@ -19,12 +19,14 @@ import java.awt.Cursor;
 public class Principal extends JPanel{
 	private Ventana ventana;
 	private PantallaCoches coche;
+	private PantallaClientes cliente;
 	
 	public Principal(Ventana v) {
 		super();
 		setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		this.ventana=v;
 		this.coche=new PantallaCoches(v);
+		this.cliente=new PantallaClientes(v);
 		setLayout(null);
 		ventana.conectarBd();
 		
@@ -53,6 +55,7 @@ public class Principal extends JPanel{
 		btnClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				cliente.listaClientes();
 				ventana.cargaPantallaClientes();
 			}
 		});
@@ -68,6 +71,12 @@ public class Principal extends JPanel{
 		add(btnParking);
 		
 		JButton btnAlquiler = new JButton("ALQUILER");
+		btnAlquiler.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ventana.cargaPantallaAlquiler();
+			}
+		});
 		btnAlquiler.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAlquiler.setBorder(new LineBorder(Color.BLUE));
 		btnAlquiler.setBounds(252, 184, 95, 48);
