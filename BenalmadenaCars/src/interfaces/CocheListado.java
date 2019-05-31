@@ -51,7 +51,6 @@ public class CocheListado extends JPanel {
 			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(coche.getColor());
 				ventana.cargaInfoCar(coche);
 				
 			}

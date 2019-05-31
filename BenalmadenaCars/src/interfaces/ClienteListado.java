@@ -43,7 +43,6 @@ public class ClienteListado extends JPanel{
 	
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(cliente.getNombre());
 				ventana.cargaInfoCliente(cliente);
 				
 			}

@@ -1,0 +1,5 @@
+BENALMÁDENA CARS S.L.                          2019-05-31T14:10:37.141
+
+CLiente con DNI: 10101101M
+Se le ha asignado el coche con matricula: 0666LFM
+El precio total de la reserva es: 550€

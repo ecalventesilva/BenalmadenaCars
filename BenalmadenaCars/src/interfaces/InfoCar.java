@@ -69,8 +69,9 @@ public class InfoCar extends JPanel{
 		infoCar.setBorder(new LineBorder(new Color(0, 0, 0)));
 		infoCar.setEditable(false);
 		infoCar.setBounds(96, 114, 269, 107);
+		infoCar.setFont(new Font("italic",Font.BOLD,14));
 		infoCar.setText("Marca: "+coche.getMarca()+" "+"\n"+"Modelo: "+coche.getModelo()+"\nMatricula: "+coche.getMatricula()+"\nColor: "+coche.getColor()+
-				"\nTipo: "+coche.getTipo()+"\nMotor: "+coche.getMotor()+"\nDescripción: "+coche.getDescripcion()+"\nPrecio/día: "+coche.getPrecio_dia());
+				"\nTipo: "+coche.getTipo()+"\nMotor: "+coche.getMotor()+"\nDescripción: "+coche.getDescripcion()+"\nPrecio/día: "+coche.getPrecio_dia()+"€");
 		
 		scrollPane.setBounds(96, 114, 269, 107);
 		scrollPane.getViewport().setBackground(Color.WHITE);

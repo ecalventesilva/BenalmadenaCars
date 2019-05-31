@@ -2,6 +2,7 @@ package interfaces;
 
 import java.awt.Color;
 
+
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
@@ -17,7 +18,7 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.awt.Cursor;
 import javax.swing.JScrollPane;
-
+import java.awt.Font;
 
 public class InfoCliente extends JPanel{
 	private Ventana ventana;
@@ -56,6 +57,7 @@ public class InfoCliente extends JPanel{
 		infoCliente.setBorder(new LineBorder(new Color(0, 0, 0)));
 		infoCliente.setEditable(false);
 		infoCliente.setBounds(96, 114, 269, 107);
+		infoCliente.setFont(new Font("italic",Font.BOLD,14));
 		infoCliente.setText("Nombre: "+cliente.getNombre()+" "+"\n"+"Apellidos : "+cliente.getApellidos()+"\nDNI: "+cliente.getDni()+"\nNºLicencia: "+
 		cliente.getLicencia()+"\nNacionalidad: "+cliente.getNacionalidad()+"\nFecha Nacimiento: "+cliente.getFechaNacimiento()+
 		"\nDirección España: "+cliente.getDireccionSpain()+"\nResidencia: "+cliente.getDireccionResidencia());
