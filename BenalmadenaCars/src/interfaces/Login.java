@@ -27,7 +27,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Cursor;
 import javax.swing.border.LineBorder;
-
+/**
+ * Ventana Login: Pantalla Login, la cual nos permite logearnos y entrar en el sistema
+ * @author Eduardo
+ *
+ */
 public class Login extends JPanel{
 	private Ventana ventana;
 	private PantallaInicio inicio;
@@ -67,6 +71,9 @@ public Login(Ventana v) {
 		campoPassword.setBounds(149, 151, 148, 20);
 		add(campoPassword);
 		
+		/**
+		 * Boton login, al introducir correctamente los datos y hacer click el usuario es logeado y conecta con el sistema
+		 */
 		JButton btnLogin = new JButton("LOGIN");
 		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLogin.addMouseListener(new MouseAdapter() {
@@ -93,7 +100,7 @@ public Login(Ventana v) {
 		            }
 		            campoUsuario.setText("");
 	            	campoPassword.setText("");
-
+	            	foundUser.close();
 		        } catch (SQLException ex) {
 		            Logger.getLogger(BenalmadenaCars.class.getName()).log(Level.SEVERE, null, ex);
 		        
@@ -103,6 +110,9 @@ public Login(Ventana v) {
 		btnLogin.setBounds(182, 227, 108, 23);
 		add(btnLogin);
 		
+		/**
+		 * Boton cancelar que nos devuelve a la pantalla anterior: Pantalla inicio
+		 */
 		JButton btnCancelar = new JButton("CANCELAR");
 		btnCancelar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCancelar.addMouseListener(new MouseAdapter() {

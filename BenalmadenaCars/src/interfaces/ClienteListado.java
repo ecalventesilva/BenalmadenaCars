@@ -15,7 +15,11 @@ import javax.swing.JPanel;
 
 import clases.Cliente;
 import clases.Coche;
-
+/**
+ * Ventana ClienteListado: pantalla que nos muestra una lista con todos los clientes registrados previamente en la base de datos
+ * @author Eduardo
+ *
+ */
 public class ClienteListado extends JPanel{
 	private Cliente cliente;
 	private Connection conec;
@@ -38,7 +42,9 @@ public class ClienteListado extends JPanel{
 		this.setSize(290,50);
 		JButton botonCliente = new JButton(cl.getNombre()+" "+cl.getApellidos());
 		add(botonCliente);
-		
+		/**
+		 * Boton cliente: carga una ventana "infoCliente" con toda la informacion del cliente que ha sido seleccionado
+		 */
 		botonCliente.addMouseListener(new MouseAdapter() {
 	
 			@Override
@@ -47,7 +53,9 @@ public class ClienteListado extends JPanel{
 				
 			}
 		});
-
+		/**
+		 * Boton eliminar: al hacer click elimina al cliente que ha sido seleccionado
+		 */
 		JButton botonEliminar = new JButton("X");
 		add(botonEliminar, BorderLayout.EAST);
 		

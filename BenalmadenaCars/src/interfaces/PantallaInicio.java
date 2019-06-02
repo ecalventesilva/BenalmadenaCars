@@ -12,7 +12,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 import java.awt.Point;
-
+/**
+ * Ventana: Pantalla Inicio, primera pantalla del programa donde se encuentra: LOGIN, REGISTRO USUARIO Y ELIMINAR USUARIO
+ * @author Eduardo
+ *
+ */
 public class PantallaInicio extends JPanel{
 
 	private Ventana ventana;
@@ -31,6 +35,9 @@ public class PantallaInicio extends JPanel{
 		lblBenalmdenaCarsSl.setBounds(37, 11, 232, 55);
 		add(lblBenalmdenaCarsSl);
 		
+		/**
+		 * Boton Login: carga la pantalla Login
+		 */
 		JButton btnLogin = new JButton("LOGIN");
 		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLogin.addMouseListener(new MouseAdapter() {
@@ -43,6 +50,9 @@ public class PantallaInicio extends JPanel{
 		btnLogin.setBounds(24, 117, 144, 23);
 		add(btnLogin);
 		
+		/**
+		 * Boton registro: carga la pantalla Registro
+		 */
 		JButton btnRegistro = new JButton("REGISTRO");
 		btnRegistro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRegistro.addMouseListener(new MouseAdapter() {
@@ -60,6 +70,9 @@ public class PantallaInicio extends JPanel{
 		lblBienvenidoAlSistema.setBounds(24, 66, 144, 28);
 		add(lblBienvenidoAlSistema);
 		
+		/**
+		 * Boton eliminar Usuario: carga la ventana Delete User
+		 */
 		JButton btnEliminarUsuario = new JButton("ELIMINAR USUARIO");
 		btnEliminarUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminarUsuario.addMouseListener(new MouseAdapter() {
@@ -71,6 +84,9 @@ public class PantallaInicio extends JPanel{
 		btnEliminarUsuario.setBounds(24, 208, 144, 23);
 		add(btnEliminarUsuario);
 		
+		/**
+		 * Label que contiene la imagen de un opel corsa
+		 */
 		JLabel imagen = new JLabel("");
 		imagen.setBounds(136, 25, 314, 251);
 		ventana=v;

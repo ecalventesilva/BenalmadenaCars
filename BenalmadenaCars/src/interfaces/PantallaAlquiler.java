@@ -41,7 +41,7 @@ public class PantallaAlquiler extends JPanel{
 	private LocalDate fechaFin;
 	private String matriculaCoche;
 	private JTextField campoPrecio;
-	private int precio;
+	private float precio;
 	private LocalDateTime fechaActual;
 	
 	public PantallaAlquiler(Ventana v) {
@@ -140,7 +140,7 @@ public class PantallaAlquiler extends JPanel{
 				matriculaCoche=campoMatricula.getText();
 				fechaInicio=LocalDate.parse(campoFinicio.getText());
 				fechaFin=LocalDate.parse(campoFfin.getText());
-				precio=Integer.parseInt(campoPrecio.getText());
+				precio=Float.parseFloat(campoPrecio.getText());
 				Alquiler alq=new Alquiler(dniCliente, matriculaCoche, fechaInicio, fechaFin);
 	            Statement registerStatement = ventana.getConnection().createStatement();
 	            registerStatement.executeUpdate(
@@ -184,6 +184,8 @@ public class PantallaAlquiler extends JPanel{
 					pw.println();
 					pw.println("CLiente con DNI: "+dniCliente);
 					pw.println("Se le ha asignado el coche con matricula: "+matriculaCoche);
+					pw.println("Con fecha de inicio: "+fechaInicio+ ",hasta la fecha de fin del alquiler: "+fechaFin);
+					pw.println("El número de días totales de la reserva es de: "+(fechaFin.getDayOfYear()-fechaInicio.getDayOfYear()+" días."));
 					pw.println("El precio total de la reserva es: "+(fechaFin.getDayOfYear()-fechaInicio.getDayOfYear())*precio+"€");
 					
 					JOptionPane.showMessageDialog(ventana, "¡IMPRESO DE RESERVA REALIZADO CON ÉXITO!","",JOptionPane.INFORMATION_MESSAGE);
@@ -204,9 +206,11 @@ public class PantallaAlquiler extends JPanel{
 		});
 		btnGuardar.setBounds(383, 481, 135, 23);
 		add(btnGuardar);
-		
+		/**
+		 * Label que contiene una imagen.
+		 */
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\1DAM\\Documents\\BenalmadenaCars\\BenalmadenaCars\\imagenes\\alquiler.png"));
+		lblNewLabel.setIcon(new ImageIcon("imagenes/alquiler.png"));
 		lblNewLabel.setBounds(39, 263, 307, 275);
 		add(lblNewLabel);
 		

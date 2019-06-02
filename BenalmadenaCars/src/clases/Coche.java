@@ -17,7 +17,17 @@ public class Coche {
     private String descripcion;
     private float precio_dia;
     
-
+/**
+ * CONSTRUCTOR DE COCHE
+ * @param marca STRING NOMBRE DE LA MARCA DEL COCHE
+ * @param modelo STRING NOMBRE DEL MODELO DEL COCHE
+ * @param matricula STRING Nº DE LA MATRICULA DEL COCHE
+ * @param color STRING COLOR DEL COCHE
+ * @param tipo STRING EL TIPO, SE REFIERE A LA CLASIFACIÓN QUE VA DESDE EL GRUPO A, HASTA EL GRUPO H
+ * @param motor STRING MOTOR, SI ES GASOLINA O DIESEL
+ * @param descripcion STRING PEQUEÑA DESCRIPCION DE LOS DATOS MAS RELEVANTES DEL VEHÍCULO
+ * @param precio_dia FLOAT PRECIO ORIENTATIVO DEL COCHE POR DÍA DE ALQUILER
+ */
     public Coche(String marca, String modelo, String matricula, String color, String tipo, String motor,
 			String descripcion, float precio_dia) {
 		super();

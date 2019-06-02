@@ -18,7 +18,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
 import java.sql.Statement;
-
+/**
+ * Ventana CocheListado: pantalla que nos muestra una lista con todos los coches registrados previamente en la base de datos
+ * @author Eduardo
+ *
+ */
 public class CocheListado extends JPanel {
 	private Coche coche;
 	private Connection conec;
@@ -45,10 +49,10 @@ public class CocheListado extends JPanel {
 		JButton botonCoche = new JButton(c.getMarca());
 		add(botonCoche);
 		
+		/**
+		 * Boton coche: carga una ventana "infocar" con toda la informacion del coche que ha sido seleccionado
+		 */
 		botonCoche.addMouseListener(new MouseAdapter() {
-			/**
-			 * MouseCliked: carga la ventana "INFOCAR".
-			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.cargaInfoCar(coche);
@@ -56,7 +60,9 @@ public class CocheListado extends JPanel {
 			}
 		});
 		
-
+		/**
+		 * Boton eliminar: al hacer click elimina el coche seleccionado
+		 */
 		JButton botonEliminar = new JButton("X");
 		add(botonEliminar, BorderLayout.EAST);
 		

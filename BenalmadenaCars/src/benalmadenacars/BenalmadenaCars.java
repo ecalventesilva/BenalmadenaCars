@@ -25,7 +25,14 @@ public class BenalmadenaCars {
     	v.setVisible(true);
     	Scanner sc = new Scanner(System.in);
         Connection connection = null;
-
+        
+        
+        
+        
+        /**
+         * CÓDIGO INICIAL PROGRAMADO PARA VERSE POR CONSOLA (LOGIN)
+         */
+/*
         try {
             connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/benalmadenacars?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
         } catch (SQLException ex) {
@@ -36,7 +43,7 @@ public class BenalmadenaCars {
         /**
          * Menu pantalla principal del programa
          */
-        String menu = "\n\nIntroduce un numero para realizar una accion:"
+    /*    String menu = "\n\nIntroduce un numero para realizar una accion:"
                 + "\n\t0 - EXIT"
                 + "\n\t1 - NEW USER"
                 + "\n\t2 - LOGIN"
@@ -81,7 +88,7 @@ public class BenalmadenaCars {
      * @param conec
      * @return
      */
-    public static Usuario registarUsuario(Scanner sc, Connection conec) {
+   /* public static Usuario registarUsuario(Scanner sc, Connection conec) {
         try {
             System.out.println("Introduce un nombre de usuario:");
             String nombre = sc.nextLine();
@@ -124,7 +131,7 @@ public class BenalmadenaCars {
      * @param conec
      * @return
      */
-    public static Usuario loginUsuario(Scanner sc, Connection conec) {
+  /*  public static Usuario loginUsuario(Scanner sc, Connection conec) {
 
         try {
             System.out.println("Introduce tu nombre de usuario");
@@ -160,7 +167,7 @@ public class BenalmadenaCars {
      * @param conec
      * @return
      */
-    public static Usuario eliminarUsuario(Scanner sc, Connection conec) {
+   /* public static Usuario eliminarUsuario(Scanner sc, Connection conec) {
 
         try {
             System.out.println("Introduce tu nombre de usuario");
@@ -174,7 +181,7 @@ public class BenalmadenaCars {
              * Uso de un 'if' para confirmar que la password introducido es
              * correcto.
              */
-            if (password.equals(password2)) {
+        /*    if (password.equals(password2)) {
 
                 Statement registerStatement = conec.createStatement();
                 registerStatement.executeUpdate(
@@ -190,7 +197,7 @@ public class BenalmadenaCars {
             ex.printStackTrace();
         }
         return null;
-
+*/
     }
 
 }

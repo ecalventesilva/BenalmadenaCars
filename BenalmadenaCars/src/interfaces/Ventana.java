@@ -33,7 +33,9 @@ public class Ventana extends JFrame{
 	private Coche coche;
 	private PantallaAlquiler alquiler;
 	private InfoCliente infoCliente;
-	
+/**
+ * Función Ventana que carga la ventana principal del programa con la configuracion propia
+ */
 public Ventana() {
 		super();
 		pantallaInicio=new PantallaInicio(this);
@@ -54,7 +56,6 @@ public Ventana() {
 		
 	}
 	
-
 public Connection getConnection() {
 	return connection;
 }
@@ -72,6 +73,9 @@ public Usuario getUsuario() {
 public void setUsuario(Usuario usuario) {
 	this.usuario = usuario;
 }
+/**
+ * Funcion que carga la Pantalla Login, donde el usuario se puede logear para entrar en el sistema
+ */
 public void cargaPantallaLogin() {
 	if(this.pantallaLogin==null) {
 		this.pantallaLogin=new Login(this);
@@ -82,6 +86,9 @@ public void cargaPantallaLogin() {
 	this.pantallaLogin.setVisible(true);
 	this.setTitle("Login");
 }
+/**
+ * Funcion que carga la pantalla Principal del programa, donde se ve el menú principal: COCHES, CLIENTES, PARKING (NO DISPONIBLE POR EL MOMENTO) Y ALQUILER.
+ */
 public void cargaPrincipal() {
 	
 	if(this.principal==null) {
@@ -93,12 +100,13 @@ public void cargaPrincipal() {
 	this.principal.setVisible(true);
 	this.setTitle("Principal");
 	
-	//this.principal.setVisible(true);
 	
 }
+/**
+ * Funcion que carga la pantallaIncio, la primera ventana del programa donde se encuentra el LOGIN, REGISTRAR USUARIO Y ELIMINAR USUARIO
+ */
 public void cargaPantallaInicio() {
 	
-	//this.setTitle("Pantalla Inicio");
 	if(this.pantallaLogin!=null) {
 		this.pantallaLogin.setVisible(false);
 	}
@@ -110,7 +118,9 @@ public void cargaPantallaInicio() {
 	this.pantallaInicio.setVisible(true);
 	this.setTitle("Bienvenido");
 }
-
+/**
+ *  Funcion que carga la pantallaRegistro, en la cual se puede registrar un nuevo usuario en el sistema
+ */
 public void cargaPantallaRegistro() {
 	if(this.pantallaRegistro==null) {
 		this.pantallaRegistro=new RegistroUsuario(this);
@@ -121,6 +131,9 @@ public void cargaPantallaRegistro() {
 	this.pantallaRegistro.setVisible(true);
 	this.setTitle("Registro");
 }
+/**
+ *  Funcion que carga la pantalla eliminar Usuario (deleteUser) en la cual se puede eliminar un usuario de la base de datos
+ */
 public void cargaDeleteUser() {
 	if(this.deleteUser==null) {
 		this.deleteUser=new DeleteUser(this);
@@ -131,6 +144,10 @@ public void cargaDeleteUser() {
 	this.deleteUser.setVisible(true);
 	this.setTitle("Eliminar Usuario");
 }
+/**
+ * Funcion que sirve para conectar con la base de datos mysql. 
+ * @return
+ */
 public Usuario conectarBd() {
 	
 	try {
@@ -146,6 +163,9 @@ public Usuario conectarBd() {
 	return usuario;
 	
 }
+/**
+ * Funcion que carga la pantalla coches donde se muestra una lista con los coches registrados previamente en la base de datos
+ */
 public void cargaCoches() {
 	this.coches=new PantallaCoches(this);
 	this.principal.setVisible(false);
@@ -155,6 +175,9 @@ public void cargaCoches() {
 	this.coches.setVisible(true);
 	this.setTitle("Coches");
 }
+/**
+ * Funcion que carga la pantalla Alquiler donde el usuario puede registrar una reserva e imprimirla en un txt.
+ */
 public void cargaPantallaAlquiler() {
 	this.alquiler=new PantallaAlquiler(this);
 	this.principal.setVisible(false);
@@ -165,7 +188,9 @@ public void cargaPantallaAlquiler() {
 	this.setTitle("Alquiler");
 	
 }
-
+/**
+ * Funcion que carga la pantalla Registro coche donde el usuario puede registrar un nuevo coche en la base de datos
+ */
 public void cargaRegistroCoche() {
 	if(this.registroCoche==null) {
 		this.registroCoche=new RegistroCoche(this);
@@ -177,7 +202,10 @@ public void cargaRegistroCoche() {
 	this.setTitle("Registar Coche");
 }
 
-
+/**
+ * Funcion que carga la pantalla InfoCar que nos muestra información sobre el coche seleccionado en la pantalla coches
+ * @param c
+ */
 public void cargaInfoCar(Coche c) {
 	this.infoCar=new InfoCar(this,c);
 
@@ -192,6 +220,10 @@ public void cargaInfoCar(Coche c) {
 	this.setTitle("Información Coche");
 	
 }
+/**
+ * Funcion que carga la pantalla infoCliente que nos muestra información sobre el cliente seleccionado en la pantalla clientes
+ * @param cl
+ */
 public void cargaInfoCliente(Cliente cl) {
 	this.infoCliente=new InfoCliente(this,cl);
 
@@ -206,7 +238,9 @@ public void cargaInfoCliente(Cliente cl) {
 	this.setTitle("Información Cliente");
 	
 }
-
+/**
+ * Funcion que carga la pantalla clientes con la lista de clientes.
+ */
 public void cargaPantallaClientes() {
 	this.pantallaClientes=new PantallaClientes(this);
 	this.principal.setVisible(false);
@@ -216,6 +250,10 @@ public void cargaPantallaClientes() {
 	this.pantallaClientes.setVisible(true);
 	this.setTitle("Clientes");
 }
+
+/**
+ * Funcion que carga la pantalla RegistroClientes donde el usuario puede registrar un nuevo cliente en la base de datos
+ */
 public void cargaPantallaRegistroClientes() {
 	if(this.registroClientes==null) {
 		this.registroClientes=new RegistroClientes(this);

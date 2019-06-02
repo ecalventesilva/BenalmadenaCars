@@ -26,7 +26,11 @@ import java.util.logging.Logger;
 
 import javax.swing.JTextField;
 import java.awt.Cursor;
-
+/**
+ * Ventana: registro Clientes, la cual nos permite registrar un nuevo cliente en la base de datos
+ * @author Eduardo
+ *
+ */
 public class RegistroClientes extends JPanel{
 	private Ventana ventana;
 	private JTextField textFieldNombre;
@@ -75,7 +79,9 @@ public class RegistroClientes extends JPanel{
 		});
 		button.setBounds(98, 415, 124, 23);
 		add(button);
-		
+		/**
+		 * Botón guardar: si se han introducido correctamente los datos, al hacer click se registrará un nuevo cliente en la base de datos
+		 */
 		JButton btnGuardar = new JButton("GUARDAR");
 		btnGuardar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGuardar.addMouseListener(new MouseAdapter() {

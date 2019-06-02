@@ -6,6 +6,7 @@ import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.MouseAdapter;
@@ -15,7 +16,11 @@ import javax.swing.border.LineBorder;
 import jdk.nashorn.internal.runtime.ListAdapter;
 
 import java.awt.Cursor;
-
+/**
+ * Ventana: pantalla principal, donde se ve el menú principal: COCHES, CLIENTES, PARKING (NO DISPONIBLE POR EL MOMENTO) Y ALQUILER.
+ * @author Eduardo
+ *
+ */
 public class Principal extends JPanel{
 	private Ventana ventana;
 	private PantallaCoches coche;
@@ -37,6 +42,9 @@ public class Principal extends JPanel{
 		label.setBounds(105, 11, 225, 48);
 		add(label);
 		
+		/**
+		 * Boton coches: carga la pantalla coches
+		 */
 		JButton btnCoches = new JButton("COCHES");
 		btnCoches.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCoches.addMouseListener(new MouseAdapter() {
@@ -48,9 +56,11 @@ public class Principal extends JPanel{
 			}
 		});
 		btnCoches.setBorder(new LineBorder(Color.RED));
-		btnCoches.setBounds(92, 99, 95, 48);
+		btnCoches.setBounds(252, 55, 95, 48);
 		add(btnCoches);
-		
+		/**
+		 * Boton clientes, carga la ventana clientes
+		 */
 		JButton btnClientes = new JButton("CLIENTES");
 		btnClientes.addMouseListener(new MouseAdapter() {
 			@Override
@@ -61,15 +71,23 @@ public class Principal extends JPanel{
 		});
 		btnClientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClientes.setBorder(new LineBorder(Color.ORANGE));
-		btnClientes.setBounds(252, 99, 95, 48);
+		btnClientes.setBounds(252, 125, 95, 48);
 		add(btnClientes);
 		
-		JButton btnParking = new JButton("PARKING");
+		/*
+		/**
+		 * Boton parking: ACTUALMENTE NO ESTÁ IMPLEMENTADO
+		 */
+		/*JButton btnParking = new JButton("PARKING");
 		btnParking.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnParking.setBorder(new LineBorder(new Color(139, 0, 0)));
 		btnParking.setBounds(92, 184, 95, 48);
-		add(btnParking);
+		add(btnParking);*/
 		
+		
+		/**
+		 * Boton alquiler: carga la pantalla alquiler
+		 */
 		JButton btnAlquiler = new JButton("ALQUILER");
 		btnAlquiler.addMouseListener(new MouseAdapter() {
 			@Override
@@ -79,9 +97,12 @@ public class Principal extends JPanel{
 		});
 		btnAlquiler.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAlquiler.setBorder(new LineBorder(Color.BLUE));
-		btnAlquiler.setBounds(252, 184, 95, 48);
+		btnAlquiler.setBounds(252, 192, 95, 48);
 		add(btnAlquiler);
 		
+		/**
+		 * Boton volver, nos devuelve a la ventana anterior: Pantalla Inicio
+		 */
 		JButton btnVolver = new JButton("VOLVER");
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
@@ -92,5 +113,15 @@ public class Principal extends JPanel{
 		btnVolver.setBounds(351, 246, 89, 23);
 		add(btnVolver);
 
+		/**
+		 * Label que contiene una imagen.
+		 */
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("imagenes/fiat500.png"));
+		lblNewLabel.setBounds(-6, 65, 248, 175);
+		add(lblNewLabel);
+		
+		
+		
 }	
 }

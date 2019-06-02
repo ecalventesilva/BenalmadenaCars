@@ -19,7 +19,11 @@ import java.sql.Connection;
 import java.awt.Cursor;
 import javax.swing.JScrollPane;
 import java.awt.Font;
-
+/**
+ * Ventana infoCliente: pantalla que carga la informacion del cliente seleccionado, dicha informacion es cargada de base de datos
+ * @author Eduardo
+ *
+ */
 public class InfoCliente extends JPanel{
 	private Ventana ventana;
 	private ClienteListado clienteListado;
@@ -68,6 +72,9 @@ public class InfoCliente extends JPanel{
 		
 		add(scrollPane);
 		
+		/**
+		 * Boton volver que nos devuelve a la ventana anterior: Pantalla Clientes
+		 */
 		JButton buttonVolver = new JButton("VOLVER");
 		buttonVolver.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonVolver.addMouseListener(new MouseAdapter() {

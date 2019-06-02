@@ -1,0 +1,7 @@
+BENALMÁDENA CARS S.L.                          2019-06-02T18:56:23.845
+
+CLiente con DNI: 88123456M
+Se le ha asignado el coche con matricula: 0666CVB
+Con fecha de inicio: 2019-06-10,hasta la fecha de fin del alquiler: 2019-06-16
+El número de días totales de la reserva es de: 6días.
+El precio total de la reserva es: 333.0€

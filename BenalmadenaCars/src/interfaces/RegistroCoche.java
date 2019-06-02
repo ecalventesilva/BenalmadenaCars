@@ -28,7 +28,11 @@ import clases.Usuario;
 import clases.Coche;
 import clases.Coche.color;
 import java.awt.Cursor;
-
+/**
+ * VENTANA: REGISTRO COCHE, en la cual un usuario puede registrar un nuevo coche en la base de datos.
+ * @author Eduardo
+ *
+ */
 public class RegistroCoche extends JPanel{
 	
 private Ventana ventana;
@@ -178,11 +182,13 @@ private JRadioButton rdbtnGasolina;
 			//rdbtnGasolina.setSelected(false);
 		}
 	});
-	
+	/**
+	 * Boton guardar: al hacer click y al haber introducido los datos correctamente, nos registrará un nuevo coche en la base de datos
+	 */
 	btnGuardar.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			//Coger todos los valores de los campos
+			
 			 ventana.conectarBd();
 	            try {
 	            	String marca=campoMarca.getText();

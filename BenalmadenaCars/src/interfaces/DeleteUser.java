@@ -31,7 +31,11 @@ import java.sql.SQLNonTransientConnectionException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ * Ventana DeleteUser: pantalla que nos permite eliminar un usuario que haya sido registrado anteriormente en el sistema y borrarlo de la base de datos
+ * @author Eduardo
+ *
+ */
 public class DeleteUser extends JPanel{
 	private Ventana ventana;
 	private JTextField campoUsuario;
@@ -86,6 +90,9 @@ public class DeleteUser extends JPanel{
 		campoPassword2.setBounds(215, 177, 158, 20);
 		add(campoPassword2);
 		
+		/**
+		 * Boton eliminar: al rellenar todos los campos correctamente y hacer click, el sistema borra al usuario 
+		 */
 		JButton btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -125,7 +132,9 @@ public class DeleteUser extends JPanel{
 							}
 			           } else {
 			        	   
-			        		   
+			        		/**
+			        		 * Comprobacion de la contraseña con un if, en el cual se ha de introudcir la contraseña correctamente 2 veces   
+			        		 */
 			        		   
 			        	   if(!password.equals("")&&!password2.equals("")&&!username.equals("")) {
 			        		   if (password.equals(password2)) {
@@ -157,6 +166,9 @@ public class DeleteUser extends JPanel{
 		btnEliminar.setBounds(284, 238, 104, 23);
 		add(btnEliminar);
 		
+		/**
+		 * Boton cancelar: el sistema nos lleva a la ventana anterior: Pantalla Inicio
+		 */
 		JButton btnCancelar = new JButton("CANCELAR");
 		btnCancelar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCancelar.addMouseListener(new MouseAdapter() {

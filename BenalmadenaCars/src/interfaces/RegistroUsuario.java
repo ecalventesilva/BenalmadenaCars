@@ -32,7 +32,11 @@ import java.awt.Cursor;
 import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-
+/**
+ * Ventana: pantallaRegistro, en la cual se puede registrar un nuevo usuario en el sistema
+ * @author Eduardo
+ *
+ */
 public class RegistroUsuario extends JPanel{
 	private Ventana ventana;
 	private JTextField campoUsuario;
@@ -53,6 +57,9 @@ public class RegistroUsuario extends JPanel{
 		label.setBounds(112, 11, 225, 48);
 		add(label);
 		
+		/**
+		 * Bonton cancelar que nos devuelve a la ventana anterior en este caso: Pantalla inicio.
+		 */
 		JButton btnCancelat = new JButton("CANCELAR");
 		btnCancelat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCancelat.addMouseListener(new MouseAdapter() {
@@ -63,6 +70,7 @@ public class RegistroUsuario extends JPanel{
 		});
 		btnCancelat.setBounds(112, 353, 124, 23);
 		add(btnCancelat);
+	
 		
 		JLabel lblNewLabel = new JLabel("Registro Nuevo Usuario");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -109,6 +117,9 @@ public class RegistroUsuario extends JPanel{
 		campoPassword.setBounds(182, 177, 209, 20);
 		add(campoPassword);
 		
+		/**
+		 * Botón confirmar, el nos permitirá registrarnos en la base de datos si previamente se han introducido los datos correctamente.
+		 */
 		JButton btnConfirmar = new JButton("CONFIRMAR");
 		btnConfirmar.addMouseListener(new MouseAdapter() {
 			@Override

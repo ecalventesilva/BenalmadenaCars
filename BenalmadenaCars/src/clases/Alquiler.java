@@ -10,7 +10,14 @@ public class Alquiler {
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	
-	
+	/**
+	 * CONSTRUCTOR ALQUILER
+	 * @param dniCliente STRING Nº DNI CLIENTE
+	 * @param matricula STRING Nº MATRICULA COCHE
+	 * @param fechaInicio LOCALDATE FECHA DE INICIO ALQUILER
+	 * @param fechaFin LOCALDATE FECHA DE FIN ALQUILER
+	 * @throws DniInvalidoException EXCEPCIÓN EL DNI DEBE DE CONTENER 9 CARACTERES
+	 */
 	public Alquiler(String dniCliente, String matricula, LocalDate fechaInicio, LocalDate fechaFin) throws DniInvalidoException {
 		super();
 		this.dniCliente = dniCliente;
@@ -18,7 +25,7 @@ public class Alquiler {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
-	
+
 	public String getDniCliente() {
 		return dniCliente;
 	}

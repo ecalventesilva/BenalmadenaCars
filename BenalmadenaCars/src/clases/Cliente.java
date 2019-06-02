@@ -20,6 +20,15 @@ public class Cliente extends Persona {
     private String direccionSpain;
     private String direccionResidencia;
 
+    /**
+     * CONSTRUCTOR CLIENTE 
+     * @param nombre STRING NOMBRE DEL CLIENTE
+     * @param apellidos STRING APELLIDOS DEL CLIENTE
+     * @param dni STRING Nº DNI DEL CLIENTE
+     * @param licencia INT Nº DE LICENCIA DEL CLIENTE
+     * @throws DniInvalidoException EXCEPCION DNI, EL DNI TIENE QUE TENER 9 CARACTERES
+     * @throws LicenciaInvalidaException EXCEPCION LICENCIA, LA LICENCIA TIENE QUE TENER 8 NUMEROS
+     */
     public Cliente(String nombre, String apellidos, String dni, int licencia) throws DniInvalidoException, LicenciaInvalidaException {
         super(nombre, apellidos, dni, licencia);
     }

@@ -29,7 +29,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.awt.Cursor;
-
+/**
+ * Pantalla InfoCar: pantalla que nos carga toda la informacion del coche seleccionado, registrado anteriormente en la base de datos
+ * @author Eduardo
+ *
+ */
 public class InfoCar extends JPanel{
 	private Ventana ventana;
 	private Coche coche;

@@ -13,7 +13,17 @@ public class Persona {
     private String apellidos;
     private String dni;
     private int licencia;
-
+    
+    
+    /**
+     * CONSTRUCTOR PERSONA
+     * @param nombre STRING NOMBRE DE LA PERSONA
+     * @param apellidos STRING APELLIDOS DE LA PERSONA
+     * @param dni STRING Nº DNI DE LA PERSONA
+     * @param licencia INT Nº DE LICENCIA DE LA PERSONA
+     * @throws DniInvalidoException EXCEPCION DNI, EL DNI TIENE QUE TENER 9 CARACTERES
+     * @throws LicenciaInvalidaException EXCEPCION LICENCIA, LA LICENCIA TIENE QUE TENER 8 NUMEROS
+     */
     public Persona(String nombre, String apellidos, String dni, int licencia) throws DniInvalidoException, LicenciaInvalidaException{
         this.nombre = nombre;
         this.apellidos = apellidos;
